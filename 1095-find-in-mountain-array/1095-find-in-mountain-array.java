@@ -10,8 +10,8 @@
 class Solution {
     public int findInMountainArray(int target, MountainArray mountainArr) {
         
-        int s=0,e=mountainArr.length()-1,m=0;
-        int peak =0;
+        int s=0,x=mountainArr.length()-1,m=0;
+        int peak =0;int e=x;
         while(s!=e)
         {
             m= s+(e-s)/2;
@@ -47,7 +47,7 @@ class Solution {
             }
         }
         s=peak+1;
-        e=mountainArr.length()-1;
+        e=x;
          while(s<=e)
         {
             m = s+(e-s)/2;
