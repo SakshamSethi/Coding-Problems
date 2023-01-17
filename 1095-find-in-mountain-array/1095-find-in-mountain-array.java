@@ -1,67 +1,78 @@
-/**
- * // This is MountainArray's API interface.
- * // You should not implement it, or speculate about its implementation
- * interface MountainArray {
- *     public int get(int index) {}
- *     public int length() {}
- * }
- */
- 
 class Solution {
-    public int findInMountainArray(int target, MountainArray mountainArr) {
+    public int findInMountainArray(int target, MountainArray arr) {
         
-        int s=0,x=mountainArr.length()-1,m=0;
-        int peak =0;int e=x;
-        while(s!=e)
+       int start =0;
+        int end = arr.length()-1;
+        int mid=0;
+        while(start!=end)
         {
-            m= s+(e-s)/2;
-            if(mountainArr.get(m)>mountainArr.get(m+1))
+            mid = start + (end-start)/2;
+            
+      
+         
+            if(arr.get(mid)>arr.get(mid+1))
             {
-                e=m;
+                end = mid;
             }
-            else
+            else if(arr.get(mid)<arr.get(mid+1))
             {
-            s=m+1;
-             }
-        }
-        
-        peak =s;
-        System.out.println(peak);
-        s=0;
-        e=peak;
-        while(s<=e)
-        {
-            m = s+(e-s)/2;
-            if(target== mountainArr.get(m))
-            {
-                return m;
-               
-            }
-            else if(target>mountainArr.get(m))
-            {
-                s=m+1;
-            }
-            else
-            {
-                e=m-1;
+                start = mid+1;
             }
         }
-        s=peak+1;
-        e=x;
-         while(s<=e)
+        int peak = start;
+        start = 0;
+        end = peak;
+        int x= bs(arr,target,start,end);
+        start =peak;
+        end = arr.length()-1;
+        int y =bsr(arr,target,start,end);
+        if(x>-1 && y>-1)
         {
-            m = s+(e-s)/2;
-            if(target== mountainArr.get(m))
+            return x;
+        }
+        else if(x==-1)
+        {return y;
+        }
+            else { return x;
+                 }
+            
+    }
+    static int bs(MountainArray arr , int target,int start,int end)
+    {
+        while(start<=end)
+        {
+       int mid = start + (end-start)/2;
+            if(target==arr.get(mid))
             {
-                return m;
+                return mid;
             }
-            else if(target>mountainArr.get(m))
+            else if(target>arr.get(mid))
             {
-                e=m-1;
+                start =mid+1;
             }
             else
             {
-                s=m+1;
+                end=mid-1;
+            }
+        }
+        return -1;
+    }
+    static int bsr(MountainArray arr , int target,int start,int end)
+    {
+        while(start<=end)
+        {
+       int mid = start + (end-start)/2;
+            if(target==arr.get(mid))
+            {
+                return mid;
+            }
+            else if(target>arr.get(mid))
+            {
+                end =mid-1;
+            }
+            else
+            {
+                start=mid+1;
             }
         }
         return -1;
