@@ -5,7 +5,7 @@ class Solution {
 
         while(s<=e)
         {
-            System.out.println(s+" "+e);
+           
             if(target==numbers[s]+numbers[e])
             {
                 ans[0]=s+1;
