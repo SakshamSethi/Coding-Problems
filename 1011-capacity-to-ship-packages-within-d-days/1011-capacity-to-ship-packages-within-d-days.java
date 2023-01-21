@@ -1,49 +1,23 @@
 class Solution {
-    public int shipWithinDays(int[] weights, int days) {
-        int s = 0;
-        int e = 0;
-        
-        for(int x: weights)
-        {
-            s = Math.max(s,x);
-            e +=x;
+    public int shipWithinDays(int[] weights, int D) {
+        int left = 0, right = 0;
+        for (int w: weights) {
+            left = Math.max(left, w);
+            right += w;
         }
-        
-        int ans=0;
-        int sum=0,d=0;
-        while(s<e)
-        {
-            int  m = s + (e-s)/2;
-             sum=0;
-             d=1;
-                  for(int x: weights)
-                    {                   
-                if((sum+x)>m)
-                    
-                {
-                    d++;
-                    sum=0;
-                    
+        while (left < right) {
+            int mid = (left + right) / 2, need = 1, cur = 0;
+            for (int w: weights) {
+                if (cur + w > mid) {
+                    need += 1;
+                    cur = 0;
                 }
-                      sum+=x;
-                    }
-                
-            
-            
-            
-            if(d>days)
-            {
-                
-                s=m+1;
+                cur += w;
             }
-            else {
-                
-               e=m;
-            }
-            
+            if (need > D) left = mid + 1;
+            else right = mid;
         }
-        return s;
-        
+        return left;
     }
     
    
