@@ -14,12 +14,13 @@ class Solution {
         
             if(Character.isLetterOrDigit(s.charAt(j))==false)j--; 
             
+            
             if(Character.isLetterOrDigit(x) && Character.isLetterOrDigit(y))
               {
-                System.out.println(x+" "+y);
+             
                if(x==y)
                   {
-                   System.out.println("a");
+                  
                       i++;
                       j--;
                   }
