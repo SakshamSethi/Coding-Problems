@@ -6,19 +6,16 @@ class Solution {
         System.out.println(s);
         int i=0;
         int j=s.length()-1;
-        while(i<=j)
+        while(i<j)
         {
-            char x = s.charAt(i);
-            char y = s.charAt(j);
-            if(Character.isLetterOrDigit(s.charAt(i))==false)i++;
-        
-            if(Character.isLetterOrDigit(s.charAt(j))==false)j--; 
+            
+         
             
             
-            if(Character.isLetterOrDigit(x) && Character.isLetterOrDigit(y))
+            if(Character.isLetterOrDigit(s.charAt(i)) && Character.isLetterOrDigit(s.charAt(j)))
               {
              
-               if(x==y)
+               if(s.charAt(j)==s.charAt(i))
                   {
                   
                       i++;
@@ -28,11 +25,14 @@ class Solution {
            else {
                 return false;
             }
+                   
            
         } 
        
             
-            
+         if(Character.isLetterOrDigit(s.charAt(i))==false)i++;
+        
+            if(Character.isLetterOrDigit(s.charAt(j))==false)j--;    
             
            
         }
