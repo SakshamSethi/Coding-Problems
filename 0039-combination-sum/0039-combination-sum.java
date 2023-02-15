@@ -1,18 +1,26 @@
-public class Solution {
+class Solution {
     public List<List<Integer>> combinationSum(int[] candidates, int target) {
-        List<List<Integer>> result = new ArrayList<List<Integer>>();
-        combinationSum(result,new ArrayList<Integer>(),candidates,target,0);
-        return result;
+        
+        List<List<Integer>> res = new ArrayList<>();
+    ans(res, new ArrayList<Integer>(),candidates,target,0);
+        return res;
+        
     }
-    public void combinationSum(List<List<Integer>> result, List<Integer> cur, int[] candidates, int target,int start) {
-        if (target > 0) {
-            for (int i = start;i < candidates.length;i++) { // not using the condition "target >= candidates[i]"
-                cur.add(candidates[i]);
-                combinationSum(result, cur, candidates, target-candidates[i],i);
-                cur.remove(cur.size() - 1);
-            }
+static void ans(List<List<Integer>> res, ArrayList<Integer>curr , int[] can, int target ,int start)
+{
+    if(target>0)
+    {
+        for(int i=start;i<can.length;i++)
+        {
+            curr.add(can[i]);
+            ans(res,curr,can,target-can[i],i);
+            curr.remove(curr.size()-1);
         }
-        if (target == 0) result.add(new ArrayList<Integer>(cur));
-        return;
     }
+    else if(target==0)
+    {  res.add(new ArrayList<>(curr));
+    }
+        return;
+    
+}
 }
