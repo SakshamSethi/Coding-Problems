@@ -13,5 +13,6 @@ public class Solution {
             }
         }
         if (target == 0) result.add(new ArrayList<Integer>(cur));
+        return;
     }
 }
