@@ -1,6 +1,6 @@
 class Solution {
     public List<String> letterCombinations(String digits) {
-        
+        if(digits==null || digits.length()==0) return new ArrayList<String>();
         return pad("",digits);
     }
     List<String> pad(String p , String up)
