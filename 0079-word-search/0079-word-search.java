@@ -28,7 +28,7 @@ return false;
       
         
      
-        
+    char temp = b[r][c];
      
         b[r][c]='0';
         
@@ -54,7 +54,7 @@ return false;
         }
 
         
-        b[r][c]=w.charAt(s);
+        b[r][c]=temp;
         
         return false;
         
