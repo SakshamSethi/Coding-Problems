@@ -1,10 +1,11 @@
 public class Solution {
     public List<Integer> diffWaysToCompute(String input) {
-        List<Integer> ret = new LinkedList<Integer>();
+        List<Integer> ret = new ArrayList<Integer>();
         for (int i=0; i<input.length(); i++) {
             if (input.charAt(i) == '-' ||
                 input.charAt(i) == '*' ||
-                input.charAt(i) == '+' ) {
+                input.charAt(i) == '+' )
+            {
                 String part1 = input.substring(0, i);
                 String part2 = input.substring(i+1);
                 List<Integer> part1Ret = diffWaysToCompute(part1);
