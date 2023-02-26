@@ -1,34 +1,44 @@
-public class Solution {
-    public List<Integer> diffWaysToCompute(String input) {
-        List<Integer> ret = new ArrayList<Integer>();
-        for (int i=0; i<input.length(); i++) {
-            if (input.charAt(i) == '-' ||
-                input.charAt(i) == '*' ||
-                input.charAt(i) == '+' )
+class Solution {
+    public List<Integer> diffWaysToCompute(String e) {
+     
+        List<Integer> ans = new ArrayList<>();
+        
+        for(int i=0;i<e.length();i++)
+        {
+            if(e.charAt(i)=='+'|| e.charAt(i)=='*'||e.charAt(i)=='-')
             {
-                String part1 = input.substring(0, i);
-                String part2 = input.substring(i+1);
-                List<Integer> part1Ret = diffWaysToCompute(part1);
-                List<Integer> part2Ret = diffWaysToCompute(part2);
-                for (Integer p1 :   part1Ret) {
-                    for (Integer p2 :   part2Ret) {
-                        int c = 0;
-                        switch (input.charAt(i)) {
-                            case '+': c = p1+p2;
+            List<Integer> left = diffWaysToCompute(e.substring(0,i));
+            List<Integer> right = diffWaysToCompute(e.substring(i+1));
+            int c=0;
+                for(Integer a : left)
+                {
+                    for(Integer b : right)
+                    {
+                        switch(e.charAt(i))
+                        {
+                            case '+': c=a+b;
                                 break;
-                            case '-': c = p1-p2;
+                                case '-': c=a-b;
                                 break;
-                            case '*': c = p1*p2;
+                                case '*': c=a*b;
                                 break;
+                                
+                                
                         }
-                        ret.add(c);
+                                ans.add(c);
                     }
                 }
+        
+                
             }
+            
+          
         }
-        if (ret.size() == 0) {
-            ret.add(Integer.valueOf(input));
-        }
-        return ret;
+          if(ans.size()==0)
+            {
+                ans.add(Integer.parseInt(e));
+            }
+            return ans;
+        
     }
 }
