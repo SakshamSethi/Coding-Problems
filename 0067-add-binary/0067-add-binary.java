@@ -120,7 +120,7 @@ class Solution {
             res.append('1');
         }
         res.reverse();
-        String ress = new String(res);
-        return ress;
+        
+        return res.toString();
     }
 }
