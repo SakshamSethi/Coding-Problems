@@ -11,13 +11,13 @@ class Solution {
     public boolean isHappy(int n) {
       
         int slow =n;
-        int fast = nextvalue(n);
-        while(fast!=1 && slow!=fast)
+        int fast =n;
+        do
         {
             slow = nextvalue(slow);
             fast = nextvalue(nextvalue(fast));
             
-        }
+        }while(fast!=1 && slow!=fast);
         return fast == 1;
     }
 }
