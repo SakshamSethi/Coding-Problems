@@ -9,6 +9,8 @@
 class Solution {
     public void deleteNode(ListNode node) {
         
+        //Current Node mai next node ki value copy krdi
+        // or fir next node ko he skip kardiya :) 
         node.val = node.next.val;
         node.next=node.next.next;
     }
