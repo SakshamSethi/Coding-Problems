@@ -9,24 +9,34 @@
  * }
  */
 class Solution {
-  
+    public ListNode partition(ListNode head, int x) {
         
-      public ListNode partition(ListNode head, int x) {
-    ListNode dummy1 = new ListNode(0), dummy2 = new ListNode(0);  //dummy heads of the 1st and 2nd queues
-    ListNode curr1 = dummy1, curr2 = dummy2;      //current tails of the two queues;
-    while (head!=null){
-        if (head.val<x) {
-            curr1.next = head;
-            curr1 = head;
-        }else {
-            curr2.next = head;
-            curr2 = head;
+       ListNode list = new ListNode(0,null);
+        ListNode ans = list;
+        ListNode ret = ans;
+        ListNode temp = head;
+        while(temp!=null)
+        {
+            if(temp.val<x)
+            {
+                ListNode node = new ListNode(temp.val,null);
+                ans.next = node;
+                ans = ans.next;
+            }
+            
+            temp = temp.next;
         }
-        head = head.next;
+        temp = head;
+        while(temp!=null)
+        {
+            if(temp.val>=x)
+            {   ListNode node = new ListNode(temp.val,null);
+                ans.next = node;
+              ans = ans.next;
+            }
+              temp=temp.next;
+        }
+        
+        return ret.next;
     }
-    curr2.next = null;          //important! avoid cycle in linked list. otherwise u will get TLE.
-    curr1.next = dummy2.next;
-    return dummy1.next;
-}
-    
 }
