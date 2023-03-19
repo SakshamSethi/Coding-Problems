@@ -14,12 +14,12 @@ class Solution {
         
     ListNode temp = head;
     int num=1;
-    
+    Stack st = new Stack();
     while(temp!=null)
     {
         int count=0;
         ListNode start = temp;
-        Stack st = new Stack();
+        
         
         while(count!=num && temp!=null)
         {
