@@ -1,5 +1,7 @@
 class Solution {
     public int largestRectangleArea(int[] heights) {
+       
+        /*
         // Two Pass Solution 
         
         int n = heights.length;
@@ -45,5 +47,30 @@ class Solution {
             ans = Math.max(ans,((rightsmall[i]-leftsmall[i]+1)*heights[i]));
         }
         return ans;
+        */
+        
+        // one pass solution 
+        
+        Stack<Integer> st = new Stack();
+        
+        int n = heights.length;
+        int maxA =0;
+        for(int i =0 ; i<=n;i++)
+        {
+            while(!st.isEmpty() && (i==n || heights[st.peek()]>=heights[i]))
+            {
+                int height = heights[st.peek()];
+                st.pop();
+                int width=0;
+                if(st.isEmpty()) width=i;
+                else width = i-st.peek()-1;
+                maxA = Math.max(maxA , width*height);
+            }
+            st.push(i);
+        }
+        return maxA;
+        
+        
+        
     }
 }
