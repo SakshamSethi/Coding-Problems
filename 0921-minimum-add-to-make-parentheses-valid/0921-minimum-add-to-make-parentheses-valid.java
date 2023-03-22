@@ -2,9 +2,9 @@ class Solution {
     public int minAddToMakeValid(String s) {
       
         Stack<Character> sq = new Stack();
-        for(int i =0 ; i<s.length();i++)
+        for(char c : s.toCharArray())
         { 
-        if( s.charAt(i)==')')
+        if( c ==')')
         {
             if(!sq.isEmpty() && sq.peek()=='(')
                 
