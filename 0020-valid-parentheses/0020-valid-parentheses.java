@@ -13,24 +13,20 @@ class Solution {
    {
        if(s.charAt(i)==')')
        {
-           if(!sq.isEmpty() && sq.peek()=='('  )
-           sq.pop();
-           else
+           if(sq.isEmpty() || sq.pop()!='('  )
+           
                return false;
        }
        if(s.charAt(i)=='}')
        {
-           if(!sq.isEmpty() && sq.peek()=='{'  )
-           sq.pop();
-           else
+           if(sq.isEmpty() || sq.pop()!='{'  )
+           
                return false;
        }
        if(s.charAt(i)==']')
        {
-           if( !sq.isEmpty() && sq.peek()=='['  )
-           sq.pop();
+           if(sq.isEmpty() || sq.pop()!='['  )
            
-           else
                return false;
        }
          
