@@ -8,26 +8,19 @@ Queue<Integer> q;
     
     public int ping(int t) {
      
-        if(q.isEmpty()){
-            q.add(t);
-            return 1;
-        }
-        if(!q.isEmpty())
-        {
-            if(t<=3000)
-            {
-                q.add(t);
-            }
-            else
-            {
-                int margin = t-3000;
+      
+        
+           
+           
+            
+              int margin = t-3000;
                 while(!q.isEmpty() && q.peek()<margin)
                 {
                     q.poll();
                 }
                 q.add(t);
-            }
-        }
+            
+        
 return q.size();
     }
 }
