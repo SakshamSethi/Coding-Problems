@@ -1,4 +1,5 @@
-public class Solution {
+
+      public class Solution {
     public String decodeString(String s) {
         String res = "";
         Stack<Integer> countStack = new Stack<>();
@@ -34,3 +35,4 @@ public class Solution {
         return res;
     }
 }
+    
