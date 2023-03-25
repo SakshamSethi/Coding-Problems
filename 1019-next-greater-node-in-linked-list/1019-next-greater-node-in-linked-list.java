@@ -11,7 +11,7 @@
 class Solution {
     public int[] nextLargerNodes(ListNode head) {
         
-        ListNode temp = head;
+       /* ListNode temp = head;
         int length =0;
     while(temp!=null)
     {
@@ -38,6 +38,41 @@ class Solution {
                 ans[i++]=0;
             }
             temp=temp.next;
+        }
+        return ans; */
+        
+        // using Stack
+        
+        ListNode temp = head;
+        int n = 0;
+        while(temp!=null)
+        {
+            n++;
+            temp=temp.next;
+        }
+        int[] arr = new int[n];
+        temp = head;
+        int k=0;
+        while(temp!=null)
+        {
+            arr[k++]=temp.val;
+            temp=temp.next;
+        }
+        Stack<Integer>st = new Stack();
+        int[]ans=new int[n];
+        for(int i=n-1;i>=0;i--)
+        {
+           
+            
+            while(!st.isEmpty() && st.peek()<=arr[i])
+            {
+                st.pop();
+            }
+            if(!st.isEmpty()) {ans[i]=st.peek();}
+            else {ans[i]=0;}
+            
+            st.push(arr[i]);
+            
         }
         return ans;
     }
