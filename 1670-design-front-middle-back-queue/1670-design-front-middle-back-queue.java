@@ -1,142 +1,140 @@
 class FrontMiddleBackQueue {
-    
-    class ListNode{
-        int val;
-        ListNode next;
-        ListNode prev;
-        ListNode(int val){
-            this.val = val;
+        ListNode dummyStart;
+        ListNode dummyTail;
+        ListNode mid;
+        int size;
+
+        public FrontMiddleBackQueue() {
+            dummyStart = new ListNode(0);
+            dummyTail = new ListNode(0);
+            dummyStart.next = dummyTail;
+            dummyTail.prev = dummyStart;
         }
-    }
-    
-    int count;
-    ListNode start;
-    ListNode middle;
-    ListNode last;
-    
-    public FrontMiddleBackQueue() {
-        count = 0;
-        //place holders for start, middle, last
-        start = new ListNode(-1);
-        middle = new ListNode(-1);
-        last = new ListNode(-1);
-        
-        start.next = last;
-        last.prev = start;
-    }
-    
-    public void pushFront(int val) {
-        ListNode newNode = new ListNode(val);
-        
-        //insert new node in between start and start.next
-        newNode.next = start.next;
-        newNode.prev = start;
-        
-        //fix start and start.next to connect the new node
-        start.next.prev = newNode;
-        start.next = newNode;
-        
-        //increment count
-        count++;
-        if (count == 1)
-            middle = newNode;   // for first time the newNode will be the middle node
-        else if(count % 2 == 0) // if even store to the left side of existing middle node
-            middle = middle.prev;
-    }
-    
-    public void pushMiddle(int val) {
-        ListNode newNode = new ListNode(val);
-        
-        //if there is not extra node other than start and last then add the node to the middle
-        if (count == 0){
-            newNode.prev = start;
-            newNode.next = last;
-            
-            last.prev = newNode;
-            start.next = newNode;
+
+        public void pushFront(int val) {
+            ListNode newStart = new ListNode(val);
+            newStart.next = dummyStart.next;
+            newStart.prev = dummyStart;
+            dummyStart.next.prev = newStart;
+            dummyStart.next = newStart;
+            size++;
+            if (size == 1) {
+                mid = newStart;
+            } else {
+                if (size % 2 == 0) {
+                    mid = mid.prev;
+                }
+            }
         }
-        else if(count % 2 == 0){   // if count is even then newNode will be pushed after middle
-            newNode.next = middle.next;
-            newNode.prev = middle;
-            
-            middle.next.prev = newNode;
-            middle.next = newNode;
+
+        public void pushMiddle(int val) {
+           if (size == 0) {
+               ListNode newMid = new ListNode(val);
+               newMid.prev = dummyStart;
+               newMid.next = dummyTail;
+               dummyStart.next = newMid;
+               dummyTail.prev = newMid;
+               mid = newMid;
+               size++;
+               return;
+           }
+            if (size % 2 == 0) {
+                pushNext(val);
+            } else {
+                pushPrev(val);
+            }
+            size++;
         }
-        else{
-            newNode.prev = middle.prev; // if count is odd then newNode will be pushed before middle
-            newNode.next = middle;
-            
-            middle.prev.next = newNode;
-            middle.prev = newNode;
+
+        private void pushPrev(int val) {
+            ListNode newMid = new ListNode(val);
+            newMid.next = mid;
+            newMid.prev = mid.prev;
+            newMid.prev.next = newMid;
+            mid.prev = newMid;
+            mid = newMid;
         }
-        middle = newNode;
-        count++;
-        return;
-    }
-    
-    public void pushBack(int val) {
-        ListNode newNode = new ListNode(val);
-        
-        // newNode will be inserted before the last
-        newNode.prev = last.prev;
-        newNode.next = last;
-        
-        last.prev.next = newNode;
-        last.prev = newNode;
-        
-        count++;
-        if (count == 1)
-            middle = newNode;
-        else if(count % 2 != 0) // if count is odd then middle will be set to the right side of new node
-            middle = middle.next;
-    }
-    
-    public int popFront() {
-        // no element to pop
-        if (count == 0)
+
+        private void pushNext(int val) {
+            ListNode newMid = new ListNode(val);
+            newMid.next = mid.next;
+            newMid.prev = mid;
+            mid.next.prev = newMid;
+            mid.next = newMid;
+            mid = newMid;
+        }
+
+        public void pushBack(int val) {
+            ListNode newEnd = new ListNode(val);
+            newEnd.prev = dummyTail.prev;
+            newEnd.next = dummyTail;
+            dummyTail.prev.next = newEnd;
+            dummyTail.prev = newEnd;
+            size++;
+            if (size == 1) {
+                mid = newEnd;
+            } else {
+                if (size % 2 != 0) {
+                    mid = mid.next;
+                }
+            }
+        }
+
+        public int popFront() {
+            if (size > 0) {
+                ListNode next = dummyStart.next;
+                removeNode(next);
+                size--;
+                if (size % 2 != 0) {
+                    mid = mid.next;
+                }
+                return next.val;
+            }
             return -1;
-        
-        int result = start.next.val;
-        //remove the start.next for pop operation
-        removeNode(start.next);
-        count--;
-        if (count % 2 != 0)
-            middle = middle.next;
-        
-        return result;
-    }
-    
-    public int popMiddle() {
-        // do only if there are elements
-        if (count == 0)
+        }
+
+        private void removeNode(ListNode node) {
+            node.next.prev = node.prev;
+            node.prev.next = node.next;
+        }
+
+        public int popMiddle() {
+            if (size > 0) {
+                int val = mid.val;
+                mid.next.prev = mid.prev;
+                mid.prev.next = mid.next;
+                if (size % 2 == 0) {
+                    mid = mid.next;
+                } else {
+                    mid = mid.prev;
+                }
+                size--;
+                return val;
+            }
             return -1;
-        
-        int result = middle.val;
-        removeNode(middle);
-        if (count % 2 != 0) // if count is odd then set middl to the left node
-            middle = middle.prev;
-        else
-            middle = middle.next; // if count is even then set middle to the right node
-        count--;
-        return result;
-    }
-    
-    public int popBack() {
-        // do only if there are elements
-        if (count == 0)
+        }
+
+        public int popBack() {
+            if (size > 0) {
+                ListNode prev = dummyTail.prev;
+                removeNode(prev);
+                size--;
+                if (size % 2 == 0) {
+                    mid = mid.prev;
+                }
+                return prev.val;
+            }
             return -1;
-        
-        int result = last.prev.val;
-        //remove the last.prev node
-        removeNode(last.prev);
-        count--;
-        if (count % 2 == 0) // if count is even then set middle to the left node
-            middle = middle.prev;
-        return result;
-    }
-    
-    private void removeNode(ListNode node){
-        node.next.prev = node.prev;
-        node.prev.next = node.next;
-    }
+        }
+
+        static class ListNode {
+            int val;
+            ListNode prev;
+            ListNode next;
+
+            public ListNode(int val) {
+                this.val = val;
+            }
+
+        }
 }
