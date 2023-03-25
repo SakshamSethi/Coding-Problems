@@ -22,21 +22,50 @@ private void resetHeight(char[][] matrix, int[] height, int idx){
     }
 }    
 
-public int largestInLine(int[] height) {
-    if(height == null || height.length == 0) return 0;
-    int len = height.length;
-    Stack<Integer> s = new Stack<Integer>();
-    int maxArea = 0;
-    for(int i = 0; i <= len; i++){
-        int h = (i == len ? 0 : height[i]);
-        if(s.isEmpty() || h >= height[s.peek()]){
-            s.push(i);
-        }else{
-            int tp = s.pop();
-            maxArea = Math.max(maxArea, height[tp] * (s.isEmpty() ? i : i - 1 - s.peek()));
-            i--;
+public int largestInLine(int[] heights) {
+    if(heights == null || heights.length == 0) return 0;
+        int n = heights.length;
+        int[] leftsmall = new int[n]; // for calculating left smaller elements =>boundary
+        int[] rightsmall = new int[n]; // calculating right small => Boundary
+        
+        Stack<Integer> st = new Stack();
+        // calculating left small
+        for(int i =0;i<n;i++)
+        {
+            while(!st.isEmpty() && heights[st.peek()]>=heights[i])
+            {
+                st.pop();
+            }
+            if(st.isEmpty()) leftsmall[i]=0;
+            else leftsmall[i] =st.peek()+1;
+            st.push(i);
+            
         }
-    }
-    return maxArea;
+        // clear stack
+        while(!st.isEmpty())
+        {
+            st.pop();
+        }
+        // calculate right small
+        
+         for(int i=n-1;i>=0;i--)
+        {
+            while(!st.isEmpty() && heights[st.peek()]>=heights[i])
+            {
+                st.pop();
+            }
+            if(st.isEmpty()) rightsmall[i]=n-1;
+            else rightsmall[i] =st.peek()-1;
+            st.push(i);
+            
+        }
+        
+        //calculate max height;
+        int ans =0;
+        for(int i=0;i<n;i++)
+        {
+            ans = Math.max(ans,((rightsmall[i]-leftsmall[i]+1)*heights[i]));
+        }
+        return ans;
 }
 }
