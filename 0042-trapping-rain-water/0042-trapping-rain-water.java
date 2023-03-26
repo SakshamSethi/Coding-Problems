@@ -1,6 +1,8 @@
 class Solution {
     public int trap(int[] a) {
         
+        if(a.length<3)return 0;
+        
         // using two pointers approach 
         
         int l = 0;
