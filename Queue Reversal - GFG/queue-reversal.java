@@ -53,7 +53,7 @@ class GfG{
     //Function to reverse the queue.
     public Queue<Integer> rev(Queue<Integer> q){
         //add code here.
-        Stack<Integer> st = new Stack<Integer>();
+      /*  Stack<Integer> st = new Stack<Integer>();
         
         while(!q.isEmpty())
         {
@@ -64,7 +64,22 @@ class GfG{
             q.add(st.pop());
         }
         return q;
+        */
         
+        // using Recursion 
+        
+        queuereversal(q);
+        return q;
+    }
+    
+    void queuereversal(Queue<Integer> q)
+    {
+        if(q.isEmpty()) return ;
+        int first = q.remove();
+        
+        queuereversal(q);
+        
+        q.add(first);
         
     }
 }
