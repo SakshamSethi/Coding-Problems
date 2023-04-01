@@ -13,6 +13,7 @@ return binarysearch(nums,target,0,e);
             return m;
         
         while(s<e){
+            
         if(nums[m]>t)
         return binarysearch(nums,t,s,m-1);
         
