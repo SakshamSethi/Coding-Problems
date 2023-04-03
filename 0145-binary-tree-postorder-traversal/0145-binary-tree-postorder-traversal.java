@@ -18,11 +18,30 @@ class Solution {
         
         List<Integer> ans = new ArrayList<>();
         
-        inorder(root,ans);
-        return ans;
+    //Recursive Solution    postorder(root,ans);
+
+            //Iterative Solution :
+    if(root==null)return ans;
+            Stack<TreeNode>st1 = new Stack();
+            Stack<TreeNode>st2 = new Stack();
+            st1.push(root);
+            TreeNode node;
+            while(!st1.isEmpty())
+            {
+                node = st1.pop();
+                if(node.left!=null) st1.push(node.left);
+                if(node.right!=null) st1.push(node.right);
+                st2.push(node);
+                
+            }
+            while(!st2.isEmpty())
+            {
+                ans.add(st2.pop().val);
+            }
+            return ans;
         
     }
- public void inorder(TreeNode node ,List<Integer>ans )
+ /* public void postorder(TreeNode node ,List<Integer>ans )
  {
     //Left->Right->Root
      
@@ -32,5 +51,5 @@ class Solution {
     inorder(node.right,ans);
      ans.add(node.val);
      return;
- }
+ }*/
 }
