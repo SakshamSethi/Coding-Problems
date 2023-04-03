@@ -17,12 +17,28 @@ class Solution {
        public List<Integer> preorderTraversal(TreeNode root) {
         
         List<Integer> ans = new ArrayList<>();
-        
-        inorder(root,ans);
-        return ans;
+        if(root==null)return ans;
+    //Recursive solution ->    inorder(root,ans);
+      
+           //Iterative solution :
+           
+      Stack<TreeNode>st = new Stack<>();
+          
+          st.push(root);
+           
+           while(!st.isEmpty())
+           {
+               ans.add(st.peek().val);
+               TreeNode temp = st.pop();
+               if(temp.right!=null) st.push(temp.right);
+               if(temp.left!=null) st.push(temp.left);
+               
+           }
+          
+           return ans;
         
     }
- public void inorder(TreeNode node ,List<Integer>ans )
+/* public void inorder(TreeNode node ,List<Integer>ans )
  {
     //Root->Left->Right
      
@@ -32,5 +48,5 @@ class Solution {
      inorder(node.left,ans);
     inorder(node.right,ans);
      return;
- }
+ }*/
 }
