@@ -16,6 +16,7 @@
 class Solution {
        public List<Integer> preorderTraversal(TreeNode root) {
         
+           /*
         List<Integer> ans = new ArrayList<>();
         if(root==null)return ans;
     //Recursive solution ->    inorder(root,ans);
@@ -35,8 +36,46 @@ class Solution {
                
            }
           
-           return ans;
+           return ans; */
+        // Morris Traversal , Constant space
+                   List<Integer> ans = new ArrayList();
+        TreeNode cur = root;
         
+        while(cur!=null)
+        {
+            if(cur.left == null)
+            {
+                ans.add(cur.val);
+                cur = cur.right;
+            }
+            else
+            {
+                TreeNode prev = cur.left;
+                
+                while(prev.right!=null && prev.right != cur)
+                {
+                    prev=prev.right;
+                }
+                
+                if(prev.right==null) // Make a thread
+                {
+                    prev.right = cur;
+                       ans.add(cur.val);
+                    cur=cur.left;
+                }
+                else // Left SubTree is Completely visited 
+                {
+                    prev.right = null ;
+                 
+                    cur=cur.right;
+                }
+      
+                
+                
+            }
+       
+        }
+             return ans;
     }
 /* public void inorder(TreeNode node ,List<Integer>ans )
  {
