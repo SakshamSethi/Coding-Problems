@@ -21,7 +21,7 @@ class Solution {
         else return root; */
 
     //Optimized Approach 
-        // jo poiint of split hoga wahi hoga LCA in BST 
+        // jo point of split hoga wahi hoga LCA in BST 
            if((root.val <= p.val && root.val  >= q.val )|| (root.val >= p.val && root.val <= q.val))
                 return root;
               
@@ -29,7 +29,8 @@ class Solution {
         if(root.val<p.val && root.val<q.val) return lowestCommonAncestor(root.right,p,q);
         
 
-           return root;   
+        if(root.val == p.val) return p;
+        else return q;
               
               
               
