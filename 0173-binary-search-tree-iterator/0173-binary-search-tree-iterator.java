@@ -15,8 +15,10 @@
  */
 class BSTIterator {
     
-Queue<TreeNode> inorder = new LinkedList<>();
-    public BSTIterator(TreeNode root) {
+
+   /* Queue<TreeNode> inorder = new LinkedList<>();
+   My simple Solution
+   public BSTIterator(TreeNode root) {
             inorderTravel(root);
             
     }
@@ -38,6 +40,42 @@ Queue<TreeNode> inorder = new LinkedList<>();
         inorder.offer(root);
         inorderTravel(root.right);
         return;
+        
+    } 
+    */
+    // O(H) space solution using a stack 
+
+    Stack<TreeNode> st = new Stack();
+    
+  public BSTIterator(TreeNode root) {
+    
+   inorderTravel(root);
+            
+    }
+    
+    public int next() {
+    
+     TreeNode node = st.pop() ;
+     
+        
+            inorderTravel(node.right);
+        
+        return node.val;
+    
+    }
+    
+    public boolean hasNext() {
+        return !st.isEmpty();
+    }
+    
+    void inorderTravel(TreeNode root)
+    {
+    while(root!=null)
+    {
+        st.push(root);
+        root=root.left;
+    }
+
         
     }
     
