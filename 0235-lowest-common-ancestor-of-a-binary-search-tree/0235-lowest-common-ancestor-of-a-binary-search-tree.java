@@ -10,18 +10,39 @@
 
 class Solution {
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
-           if(root==null||root==p||root==q)
-            return root;
         
-           TreeNode left = lowestCommonAncestor(root.left,p,q);
-           TreeNode right = lowestCommonAncestor(root.right,p,q);
+       /* if(root==null||root=p||root=q) return root;
         
-        if(left==null)
-            return right;
+        TreeNode Left = lowestCommonAncestor(root.left,p,q);
+        TreeNode right = lowestCommonAncestor(root.right,p,q);
         
-        else if(right==null)
-            return left;
-        else
-            return root;
+        if(left==null) return right;
+        else if (right == null) return left;
+        else return root; */
+
+    //Optimized Approach 
+        // jo poiint of split hoga wahi hoga LCA in BST 
+           if((root.val <= p.val && root.val  >= q.val )|| (root.val >= p.val && root.val <= q.val))
+                return root;
+              
+        if(root.val>p.val && root.val>q.val) return lowestCommonAncestor(root.left,p,q);
+        if(root.val<p.val && root.val<q.val) return lowestCommonAncestor(root.right,p,q);
+        
+
+           return root;   
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              
     }
 }
