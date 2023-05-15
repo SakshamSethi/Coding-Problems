@@ -15,7 +15,7 @@
  */
 class Solution {
     public int kthSmallest(TreeNode root, int k) {
-        // using the property that inorder traversal of BST gives an sorted array O(n)
+   /*     // using the property that inorder traversal of BST gives an sorted array O(n)
         List<Integer> arr = new ArrayList<>();
      
         inorder(root,arr);
@@ -31,5 +31,61 @@ class Solution {
         inorder(root.right,arr);
         return;
         
+    }*/
+        
+        
+        //Mooris Traversal
+    
+    TreeNode cur = root;
+    int ans =0;    
+        int count = 0;
+        while(cur != null)
+        {
+            
+            if(cur.left == null)
+            {
+                count++;
+                if(count == k)
+                    ans =cur.val;
+                cur = cur.right;
+            }
+            else
+            {
+                TreeNode prev = cur.left;
+                
+                while(prev.right!=null && prev.right!=cur)
+                    prev = prev.right;
+                
+                if(prev.right == null)
+                {prev.right = cur;
+                    cur = cur.left;
+                }else
+                {  prev.right = null;
+                count++;
+                    if(count == k) ans =cur.val;
+                cur = cur.right;
+            }
+            }
+        }
+    
+    return ans;
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     }
 }
