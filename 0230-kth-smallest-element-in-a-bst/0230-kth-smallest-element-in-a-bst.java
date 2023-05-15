@@ -15,8 +15,9 @@
  */
 class Solution {
     public int kthSmallest(TreeNode root, int k) {
+        // using the property that inorder traversal of BST gives an sorted array O(n)
         List<Integer> arr = new ArrayList<>();
-    
+     
         inorder(root,arr);
         return arr.get(k-1);
         
