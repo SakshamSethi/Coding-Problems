@@ -1,49 +1,68 @@
-public class BSTIterator {
-    private Stack<TreeNode> stack = new Stack<TreeNode>();
-    boolean reverse = true; 
-    
-    public BSTIterator(TreeNode root, boolean isReverse) {
-        reverse = isReverse; 
-        pushAll(root);
-    }
-
-    /** @return whether we have a next smallest number */
-    public boolean hasNext() {
-        return !stack.isEmpty();
-    }
-
-    /** @return the next smallest number */
-    public int next() {
-        TreeNode tmpNode = stack.pop();
-        if(reverse == false) pushAll(tmpNode.right);
-        else pushAll(tmpNode.left); 
-        return tmpNode.val;
-    }
-    
-    private void pushAll(TreeNode node) {
-        while(node != null) {
-             stack.push(node);
-             if(reverse == true) {
-                 node = node.right; 
-             } else {
-                 node = node.left; 
-             }
-        }
-    }
-}
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
 class Solution {
     public boolean findTarget(TreeNode root, int k) {
-        if(root == null) return false; 
-        BSTIterator l = new BSTIterator(root, false); 
-        BSTIterator r = new BSTIterator(root, true); 
+        if(root==null)return false;
         
-        int i = l.next(); 
-        int j = r.next(); 
-        while(i<j) {
-            if(i + j == k) return true; 
-            else if(i + j < k) i = l.next(); 
-            else j = r.next(); 
+        BSTiterator i = new BSTiterator(root,true);
+        BSTiterator j = new BSTiterator(root,false);
+        
+        int l = i.next();
+        int r = j.next();
+        while(l<r)
+        {
+            if(l+r==k)return true;
+                else if(l+r<k) l = i.next();
+            else r = j.next();
         }
-        return false; 
+        return false;
+        
+    }
+    
+    class BSTiterator
+    {
+        Stack<TreeNode> st = new Stack<>();
+        boolean reverse = true;
+        // true -> next -> left
+        // false -> before -> right
+        BSTiterator(TreeNode root , boolean order)
+        {
+            reverse = order ;
+            pushAll(root);
+        }
+        int next()
+        {
+            TreeNode node = st.pop();
+             
+            if(!reverse) pushAll(node.left);
+            else pushAll(node.right);
+            
+            return node.val;
+        }
+        void pushAll(TreeNode root)
+        {
+            TreeNode node = root;
+            while(node!=null)
+            {
+                st.push(node);
+                if(!reverse) node = node.right;
+                else node = node.left;
+            }
+        }
+        
+        
     }
 }
