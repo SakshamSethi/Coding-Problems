@@ -14,23 +14,6 @@
  * }
  */
 class Solution {
-    public boolean findTarget(TreeNode root, int k) {
-        if(root==null)return false;
-        
-        BSTiterator i = new BSTiterator(root,true);
-        BSTiterator j = new BSTiterator(root,false);
-        
-        int l = i.next();
-        int r = j.next();
-        while(l<r)
-        {
-            if(l+r==k)return true;
-                else if(l+r<k) l = i.next();
-            else r = j.next();
-        }
-        return false;
-        
-    }
     
     class BSTiterator
     {
@@ -58,6 +41,7 @@ class Solution {
             while(node!=null)
             {
                 st.push(node);
+              
                 if(!reverse) node = node.right;
                 else node = node.left;
             }
@@ -65,4 +49,26 @@ class Solution {
         
         
     }
+    
+    
+    
+    public boolean findTarget(TreeNode root, int k) {
+        if(root==null)return false;
+        
+        BSTiterator i = new BSTiterator(root,true);
+        BSTiterator j = new BSTiterator(root,false);
+        
+        int l = i.next();
+        int r = j.next();
+        while(l<r)
+        {
+            if(l+r==k)return true;
+                else if(l+r<k) l = i.next();
+            else r = j.next();
+        }
+        return false;
+        
+    }
+    
+    
 }
