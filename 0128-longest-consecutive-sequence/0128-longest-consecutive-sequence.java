@@ -12,14 +12,13 @@ class Solution {
         int cs=0;
         for(int n: nums)
         {
-
-            if(!hs.contains(n-1))
+           if(!hs.contains(n-1))
             { cn = n;
               cs = 1;
                 while(hs.contains(cn+1))
                 {
-                    cn++;
-                    cs++;
+                    cn+=1;
+                    cs+=1;
                 }
              longest = Math.max(longest,cs);
             }
