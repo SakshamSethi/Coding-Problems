@@ -7,7 +7,7 @@ class Solution {
         for(int n: nums)
         { hs.add(n); }
         
-        int longest = 1;
+        int longest = 0;
         int cn=0;
         int cs=0;
         for(int n: nums)
