@@ -33,7 +33,7 @@
     
         // Using Tabulation
         
-        public int fib(int n)
+ /*       public int fib(int n)
         {
             if(n==0)return 0;
             if(n==1)return 1;
@@ -51,6 +51,28 @@
             }
            
             return dp[n];
+        }
+      */  
+        // const space 
+        
+   
+            public int fib(int n)
+        {
+            if(n==0)return 0;
+            if(n==1)return 1;
+            
+           int prev =1 ;
+     int prev2 =0;
+     int cur =0;
+           
+            for(int i=2; i<=n; i++)
+            {
+                cur = prev + prev2;
+                prev2 = prev;
+                prev=cur;
+            }
+           
+            return prev;
         }
 }
 
