@@ -3,12 +3,12 @@ class Solution {
        
       int n = triangle.size();
       if(n==1) return triangle.get(0).get(0);
-      int[][]dp = new int[n][n];
-      for(int[]arr : dp) Arrays.fill(arr,-1);
+     // int[][]dp = new int[n][n];
+     // for(int[]arr : dp) Arrays.fill(arr,-1);
      // return count(triangle,0,0 ,n-1,dp );
       
       //Tabulation
-      for(int i=0;i<n;i++)
+    /*  for(int i=0;i<n;i++)
       {
         dp[n-1][i] = triangle.get(n-1).get(i);
       }
@@ -26,8 +26,38 @@ class Solution {
         }
       }
       return dp[0][0];
+  */
+      // space optimized 
+      
+      int[] next = new int[n];
+      
+      for(int i=0;i<n;i++)
+      {
+        next[i] = triangle.get(n-1).get(i);
+      }
+      
+      
+      for(int i=n-2;i>=0;i--)
+      {
+        int[]cur = new int[i+1];
+        for(int j=i;j>=0;j--)
+        {
+          
+          
+          int d =  triangle.get(i).get(j)+ next[j];
+          int dg =  triangle.get(i).get(j) + next[j+1];
+          
+          cur[j]=Math.min(d,dg);
+        }
+        next=cur;
+      }
+      return next[0];
+      
       
     }
+  
+  
+  
  /* int count(List<List<Integer>> triangle , int a, int b,int i, int[][]dp )
   {
     if(a==i) return triangle.get(a).get(b);
