@@ -36,10 +36,10 @@ class Solution {
       {
         int sum =0;
         
-        if(c1==c2) sum =  grid[r][c1] ;
-        else sum = grid[r][c1]+ grid[r][c2] ;
+        if(c1==c2) sum =  grid[r][c1] + count(grid,r+1,c1+dj1,c2+dj2,i,j,dp); 
+        else sum = grid[r][c1]+ grid[r][c2] + count(grid,r+1,c1+dj1,c2+dj2,i,j,dp);
       
-        sum+= count(grid,r+1,c1+dj1,c2+dj2,i,j,dp);
+        
       maxi = Math.max(maxi,sum);
       }
     } 
