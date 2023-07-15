@@ -18,22 +18,25 @@ if(sum%2==1) return false;
       }
       
       
-   return check(nums,nums.length-1,0,sum,dp);  
+   return check(nums,nums.length-1,sum/2,dp);  
       
     }
   
-  boolean check(int[]nums,int n , int sum ,int target,int[][] dp) 
+  boolean check(int[]nums,int n ,int target,int[][] dp) 
   {
-    if(sum==target/2) return true;
+    if(target==0) return true;
     
-    if(n==0) return (sum+nums[0]==target/2);
+    if(n==0) return (target-nums[0]==0);
     
-    if(dp[n][sum]!=-1)return dp[n][sum]==0?false:true;
+    if(dp[n][target]!=-1)return dp[n][target]==0?false:true;
     
-    boolean take = check(nums,n-1,sum+nums[n],target,dp);
-    boolean notTake = check(nums,n-1,sum,target,dp);
+    boolean take = false;
+    
+    if(target>=nums[n]) take = check(nums,n-1,target-nums[n],dp);
+    
+    boolean notTake = check(nums,n-1,target,dp);
   
-    dp[n][sum]=(take||notTake)?1:0;
+    dp[n][target]=(take||notTake)?1:0;
     
     return (take || notTake);
   }
