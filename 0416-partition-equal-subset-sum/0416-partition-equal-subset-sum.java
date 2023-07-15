@@ -26,7 +26,7 @@ if(sum%2==1) return false;
   {
     if(target==0) return true;
     
-    if(n==0) return (target-nums[0]==0);
+    if(n==0) return (target==nums[0]);
     
     if(dp[n][target]!=-1)return dp[n][target]==0?false:true;
     
