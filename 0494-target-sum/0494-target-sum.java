@@ -1,31 +1,35 @@
-public class Solution {
-    int total;
-    
-    public int findTargetSumWays(int[] nums, int S) {
-        total = Arrays.stream(nums).sum();
-        
-        int[][] memo = new int[nums.length][2 * total + 1];
-        for (int[] row : memo) {
-            Arrays.fill(row, Integer.MIN_VALUE);
-        }
-        return calculate(nums, 0, 0, S, memo);
+class Solution {
+    public int findTargetSumWays(int[] nums, int target) {
+
+      int n = nums.length;
+      int sum=0;
+      for(int x:nums) sum+=x;
+      
+      
+      int s2 = (sum-target);
+
+      if(s2%2!=0 || s2<0) return 0;
+      
+      int[][]dp = new int[n][(s2/2)+1];
+      
+      for(int[] arr: dp) Arrays.fill(arr,Integer.MIN_VALUE);
+      
+      return count(nums,s2/2,n-1,dp );
     }
+  int count(int[]nums , int target , int n , int[][]dp )
+  {
     
-    public int calculate(int[] nums, int i, int sum, int S, int[][] memo) {
-        if (i == nums.length) {
-            if (sum == S) {
-                return 1;
-            } else {
-                return 0;
-            }
-        } else {
-            if (memo[i][sum + total] != Integer.MIN_VALUE) {
-                return memo[i][sum + total];
-            }
-            int add = calculate(nums, i + 1, sum + nums[i], S, memo);
-            int subtract = calculate(nums, i + 1, sum - nums[i], S, memo);
-            memo[i][sum + total] = add + subtract;
-            return memo[i][sum + total];
-        }
-    }
+  if(n==0)
+			{
+				if(nums[n]==0 && target==0) return 2;
+				if(target==0 || target == nums[0]) return 1;
+				 return 0;
+			}
+    if(dp[n][target]!=Integer.MIN_VALUE)return dp[n][target];
+    
+    int take = 0 ;
+    if(target>=nums[n]) take = count(nums,target-nums[n],n-1,dp);
+    int notTake = count(nums,target,n-1,dp);
+return dp[n][target]=take+notTake;
+  }
 }
