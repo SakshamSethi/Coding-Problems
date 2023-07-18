@@ -2,7 +2,7 @@ class Solution {
     public int coinChange(int[] coins, int amount) {
     if(amount==0)return 0;
       int n = coins.length;
-    if(n==1 && amount%coins[0]!=0) return -1;
+    
       
       
       int[][]dp = new int[n][amount+1];
