@@ -9,11 +9,39 @@ class Solution {
       for(int arr[] : dp) Arrays.fill(arr,-1);
       
       
-      int ans = count(coins , n-1 , amount,dp);
-      if(ans>=(int)1e7) return -1;
-      return ans;
+      //int ans = count(coins , n-1 , amount,dp);
+      //if(ans>=(int)1e7) return -1;
+    //  return ans;
+    
+    //Tabulation :
+      
+      for(int i=0;i<=amount;i++)
+      {
+      if(i%coins[0]==0) dp[0][i]=i/coins[0];  
+      else  dp[0][i] = (int)1e7;
+        
+      }
+      
+    
+  
+  for(int i=1;i<n;i++)
+  {
+    for(int j=0;j<=amount;j++)
+    {
+      int take = Integer.MAX_VALUE;
+    
+    if(j>=coins[i]) take = 1 + dp[i][j-coins[i]] ;
+    
+    int notTake = 0 + dp[i-1][j];
+      dp[i][j]= Math.min(take,notTake);
     }
-  int count(int[]coins , int n ,int amount,int[][]dp)
+  }
+  
+  if(dp[n-1][amount]>=(int)1e7) return -1;
+  return dp[n-1][amount];
+    }
+  
+  /*int count(int[]coins , int n ,int amount,int[][]dp)
   {
     
     if(n==0)
@@ -34,5 +62,5 @@ class Solution {
     
     
     
-  }
+  }*/
 }
