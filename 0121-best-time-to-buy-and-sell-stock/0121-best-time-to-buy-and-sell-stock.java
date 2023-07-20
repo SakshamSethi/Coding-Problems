@@ -3,8 +3,8 @@ class Solution {
       
       int profit = 0 ;
       int mini = prices[0] ;
-      
-      for(int i =1 ; i<prices.length;i++)
+      int n = prices.length;
+      for(int i =1 ; i<n;i++)
       {
         
         int cost = prices[i] - mini ;
