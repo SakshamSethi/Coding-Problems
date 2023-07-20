@@ -8,10 +8,8 @@ class Solution {
       {
         
         int cost = prices[i] - mini ;
-        if(cost<0)
-        {mini = prices[i];
-        continue;
-        }profit = Math.max(profit,cost);
+        if(cost<0) mini = prices[i];
+        profit = Math.max(profit,cost);
         
       
         
