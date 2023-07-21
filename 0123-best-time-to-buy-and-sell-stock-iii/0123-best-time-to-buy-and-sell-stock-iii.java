@@ -54,7 +54,8 @@ class Solution {
     */
       
       // space optimized :
-      int[][]after = new int[2][3];
+     
+      /* int[][]after = new int[2][3];
       int[][]cur= new int[2][3];
 
       
@@ -80,8 +81,40 @@ class Solution {
         after=cur;
       }
       return after[1][2];
+     */ 
+    
+    
+    
+    // n x 4 solution :
       
+      int[][]dp = new int[n][4];
+    
+      for(int[]arr:dp)Arrays.fill(arr,-1);
+      
+      return count2(prices,0,0,dp);
+    
+    
     }
+  int count2(int[]p , int i , int trans , int[][]dp)
+  {
+    if(i==p.length || trans==4 ) return 0;
+    
+    if(dp[i][trans]!=-1) return dp[i][trans];
+    
+    int profit =0;
+    
+    if(trans%2==0)
+    {
+      profit = Math.max(-p[i]+count2(p,i+1,trans+1,dp),count2(p,i+1,trans,dp));
+    }
+    else
+    {
+      profit=Math.max(p[i]+count2(p,i+1,trans+1,dp),count2(p,i+1,trans,dp));
+    }
+    return dp[i][trans]=profit;
+  }
+  
+  
  /* int count(int[]prices,int i , int buy , int cap,int[][][]dp)
   {
     
