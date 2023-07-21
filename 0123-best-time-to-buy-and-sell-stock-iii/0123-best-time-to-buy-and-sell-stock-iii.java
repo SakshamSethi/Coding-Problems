@@ -87,15 +87,36 @@ class Solution {
     
     // n x 4 solution :
       
-      int[][]dp = new int[n][4];
+     // int[][]dp = new int[n][4];
     
-      for(int[]arr:dp)Arrays.fill(arr,-1);
+      //for(int[]arr:dp)Arrays.fill(arr,-1);
       
-      return count2(prices,0,0,dp);
+      //return count2(prices,0,0,dp);
+    // iska tabulation :
+      
+      int[][]dp = new int[n+1][5];
+      for(int i=0;i<=n;i++)dp[i][4]=0;
+      for(int i=0;i<5;i++) dp[0][i]=0;
+      for(int i=n-1;i>=0;i--)
+      {
+        for(int trans=3; trans>=0;trans--)
+        {
+            int profit =0;
     
-    
+    if(trans%2==0)
+    {
+      profit = Math.max(-prices[i]+dp[i+1][trans+1],dp[i+1][trans]);
     }
-  int count2(int[]p , int i , int trans , int[][]dp)
+    else
+    {
+      profit=Math.max(prices[i]+dp[i+1][trans+1],dp[i+1][trans]);
+    }
+     dp[i][trans]=profit;
+        }
+      }
+    return dp[0][0];
+    }
+  /*int count2(int[]p , int i , int trans , int[][]dp)
   {
     if(i==p.length || trans==4 ) return 0;
     
@@ -112,7 +133,7 @@ class Solution {
       profit=Math.max(p[i]+count2(p,i+1,trans+1,dp),count2(p,i+1,trans,dp));
     }
     return dp[i][trans]=profit;
-  }
+  } */
   
   
  /* int count(int[]prices,int i , int buy , int cap,int[][][]dp)
