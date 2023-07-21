@@ -94,7 +94,7 @@ class Solution {
       //return count2(prices,0,0,dp);
     // iska tabulation :
       
-      int[][]dp = new int[n+1][5];
+      /*int[][]dp = new int[n+1][5];
       for(int i=0;i<=n;i++)dp[i][4]=0;
       for(int i=0;i<5;i++) dp[0][i]=0;
       for(int i=n-1;i>=0;i--)
@@ -113,8 +113,33 @@ class Solution {
     }
      dp[i][trans]=profit;
         }
+      } */
+    //return dp[0][0];
+      
+      //iska space optimize 
+      int[]ahead = new int [5];
+            int[]cur = new int [5];
+
+      for(int i=n-1;i>=0;i--)
+      {
+        for(int trans=3; trans>=0;trans--)
+        {
+            int profit =0;
+    
+    if(trans%2==0)
+    {
+      profit = Math.max(-prices[i]+ahead[trans+1],ahead[trans]);
+    }
+    else
+    {
+      profit=Math.max(prices[i]+ahead[trans+1],ahead[trans]);
+    }
+     cur[trans]=profit;
+        }
+        ahead=cur;
       }
-    return dp[0][0];
+    return ahead[0];
+      
     }
   /*int count2(int[]p , int i , int trans , int[][]dp)
   {
