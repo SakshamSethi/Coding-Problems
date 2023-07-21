@@ -33,7 +33,7 @@ class Solution {
       //space optimize ;
       
           
-      int n=nums.length;
+     /* int n=nums.length;
       
       int[]ahead = new int[n+1];
       int[]cur=new int[n+1];
@@ -56,7 +56,28 @@ class Solution {
         ahead=cur;
         
       }
-      return ahead[0];
+      return ahead[0]; */
+      
+      // Best Approach 
+      int n = nums.length;
+      int max =0;
+      int[]dp = new int[n];
+      Arrays.fill(dp,1);
+      for(int i =0 ; i<n ; i++)
+      {
+        
+        for(int prev =0; prev<i ;prev++)
+        {
+          if(nums[prev]<nums[i])
+          {
+            
+            dp[i] = Math.max(dp[i], 1+dp[prev]);
+            
+          }
+        }
+        max = Math.max(max,dp[i]);
+      }
+      return max;
     }
   
   /*int count(int[]nums, int i , int prev,int[][]dp)
