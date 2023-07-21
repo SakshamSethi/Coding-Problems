@@ -15,12 +15,12 @@ class Solution {
       
       // Direct most optimised version :
        //iska space optimize 
-      int[]ahead = new int [2*(k+1)];
-            int[]cur = new int [2*(k+1)];
+      int[]ahead = new int [(2*k)+1];
+            int[]cur = new int [(2*k)+1];
 
       for(int i=n-1;i>=0;i--)
       {
-        for(int trans=(2*(k+1))-2; trans>=0;trans--)
+        for(int trans=(2*(k))-1; trans>=0;trans--)
         {
             int profit =0;
     
