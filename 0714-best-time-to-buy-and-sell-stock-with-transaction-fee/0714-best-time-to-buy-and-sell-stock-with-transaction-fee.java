@@ -5,7 +5,7 @@ class Solution {
       //for(int [] arr : dp ) Arrays.fill(arr,-1);
    //   return count(prices , 0 , 1,dp , fee); 
   
-      int[][]dp = new int[n+1][2];
+    /*  int[][]dp = new int[n+1][2];
       
       for(int i=n-1;i>=0;i--)
       {
@@ -22,6 +22,28 @@ class Solution {
       
   return dp[0][1];
     }
+  */
+  //space optimization :
+  
+      int[]ahead = new int[2];
+      int[]cur = new int[2];
+      for(int i=n-1;i>=0;i--)
+      {
+       
+    
+      cur[1] = Math.max( (-prices[i]+ ahead[0]-fee) , ahead[1]);
+    
+    
+    
+      cur[0] = Math.max(prices[i]+ ahead[1], ahead[0]) ;
+      
+    ahead=cur;
+        }
+      
+  return ahead[1];
+  
+    }
+  
  /*  int count(int[] prices , int i , int buy , int[][]dp,int fee)
   {
     
