@@ -13,7 +13,7 @@ class Solution {
      // return count(prices,0,1,2,dp);
       
       // Tabulation :
-      int[][][]dp = new int[n+1][2][3];
+      /*int[][][]dp = new int[n+1][2][3];
       for(int i=0 ; i<=n;i++)
       {
         for(int j =0 ; j<2;j++)
@@ -51,6 +51,36 @@ class Solution {
         }
       }
       return dp[0][1][2];
+    */
+      
+      // space optimized :
+      int[][]after = new int[2][3];
+      int[][]cur= new int[2][3];
+
+      
+      for(int i=n-1;i>=0;i--)
+      {
+        for(int buy=0;buy<2;buy++)
+        {
+          for(int cap=1;cap<3;cap++)
+          {
+             int profit = 0;
+           if(buy==1)
+        {
+      profit = Math.max(-prices[i]+after[0][cap], after[1][cap] );
+      
+    }
+    else
+    {
+      profit= Math.max(prices[i]+after[1][cap-1] ,after[0][cap]);
+    }
+       cur[buy][cap]=profit;
+          }
+        }
+        after=cur;
+      }
+      return after[1][2];
+      
     }
  /* int count(int[]prices,int i , int buy , int cap,int[][][]dp)
   {
