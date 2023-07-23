@@ -6,6 +6,7 @@ public int maximalRectangle(char[][] matrix) {
     for(int i = 0; i < matrix[0].length; i ++){
         if(matrix[0][i] == '1') height[i] = 1;
     }
+    
     int result = largestInLine(height);
     for(int i = 1; i < matrix.length; i ++){
         resetHeight(matrix, height, i);
