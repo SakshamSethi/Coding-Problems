@@ -1,4 +1,5 @@
 class Solution {
+ static  private int[][] dpPalin;
     public int minCut(String s) {
       
       //int[]dp=new int[s.length()];
@@ -6,7 +7,7 @@ class Solution {
       //return count(s,0,dp)-1; 
     
       int n = s.length();
-      
+      dpPalin = new int[n+1][n+1];
       int[]dp = new int[n+1];
       dp[n]=0;
       
@@ -50,7 +51,7 @@ class Solution {
     return dp[i]=mincost;
     
   }*/
- private int[][] dpPalin = new int[2000][2000];
+
     private boolean isPalindrome(String s, int i, int j) {
         if(i>=j) return true;
         if(dpPalin[i][j] != 0) return dpPalin[i][j] == 1;
