@@ -52,13 +52,34 @@ class Solution {
         {
             if(!visited[i])
             {
-                if(cycle(i,visited,adj)) return true;
+                  //if(cycle(i,visited,adj)) return true;
+                    
+                    // using dfs
+                    if(dfs(i,-1,visited,adj)) return true;
+                
             }
         }
         
         return false;
     }
-    boolean cycle(int i , boolean[]visited , ArrayList<ArrayList<Integer>>adj)
+    
+    boolean dfs(int i , int parent ,boolean visited[],ArrayList<ArrayList<Integer>>adj )
+    {
+        visited[i]=true;
+        
+        for(int node : adj.get(i))
+        {
+            if(!visited[node])
+            {
+                if(dfs(node,i,visited,adj))return true;
+            }
+            else if(visited[node] && node!=parent)return true;
+        }
+        return false;
+    }
+    
+    
+    /*boolean cycle(int i , boolean[]visited , ArrayList<ArrayList<Integer>>adj)
     {
         visited[i]=true;
         Queue<Pair> q = new LinkedList<>();
@@ -84,5 +105,5 @@ class Solution {
             }
         }
         return false;
-    }
+    } */
 }
