@@ -4,20 +4,40 @@ class Solution {
       
       int n = graph.length;
       int[]color = new int[n];
-      Arrays.fill(color,-1);
+
       
       for(int i=0 ; i<n;i++)
       {
-          if(color[i]==-1)
+          if(color[i]==0)
           {
-          if(bfs(i,color,graph)==false)
+          if(dfs(i,1,color,graph)==false)
             return false;
         }
         
       }
       return true;
     }
-  boolean bfs(int i  , int[]color , int[][]graph)
+  
+  boolean dfs(int i ,int col , int[]color , int[][]graph)
+  {
+    color[i]=col;
+    
+    for(int u : graph[i])
+    {
+      if(color[u]==0)
+      {
+          if(dfs(u,-col,color,graph)==false)return false;
+      }
+      else
+      {
+        if(color[u]==color[i]) return false;
+      }
+    }
+    return true;
+  }
+  
+  
+  /*boolean bfs(int i  , int[]color , int[][]graph)
   {
     color[i] = 0 ;
     Queue<Integer> q = new LinkedList();
@@ -43,5 +63,5 @@ class Solution {
       
     }
     return true;
-  }
+  }*/
 }
