@@ -35,7 +35,7 @@ class Solution {
     // Function to detect cycle in a directed graph.
     public boolean isCyclic(int V, ArrayList<ArrayList<Integer>> adj) {
         
-        int[]visited = new int[V];
+        /*int[]visited = new int[V];
         int[]path = new int[V];
         
         for(int i =0 ; i<V ; i++)
@@ -45,10 +45,44 @@ class Solution {
                 if(dfs(i,visited,path,adj)==true)return true;
             }
         }
-        return false;
+        return false;*/
+        
+        //using toposort
+                int[]indegree = new int[V];
+        
+        for(int i=0 ; i<V ;i++)
+        {
+            for(int u : adj.get(i))
+            {
+                indegree[u]++;
+            }
+        }
+        
+        Queue<Integer>q = new LinkedList<>();
+        
+        for(int i =0 ; i<V ;i++)
+        {
+            if(indegree[i]==0)
+            q.offer(i);
+        }
+    
+        int k=0;
+        while(!q.isEmpty())
+        {
+            int node = q.remove();
+            k++;
+            for(int u : adj.get(node))
+            {
+                indegree[u]--;
+                if(indegree[u]==0) q.add(u);
+            }
+        }
+        if(k==V)return false;
+        return true;
+
         
     }
-    boolean dfs(int node , int[]visited , int[]path ,ArrayList<ArrayList<Integer>> adj )
+    /*boolean dfs(int node , int[]visited , int[]path ,ArrayList<ArrayList<Integer>> adj )
     {
         visited[node]=1;
         path[node]=1;
@@ -66,5 +100,5 @@ class Solution {
         }
         path[node]=0;
         return false;
-    }
+    }*/
 }
