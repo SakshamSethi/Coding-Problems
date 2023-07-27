@@ -63,7 +63,7 @@ class Solution
     //Function to return list containing vertices in Topological order. 
     static int[] topoSort(int V, ArrayList<ArrayList<Integer>> adj) 
     {
-        int[] visited = new int[V];
+        /*int[] visited = new int[V];
         Stack<Integer> st = new Stack();
         
         for(int i=0 ; i<V ; i++)
@@ -77,9 +77,43 @@ class Solution
         {
             topo[k++]=st.pop();
         }
-        return topo;
+        return topo;*/
+        
+        //using bfs , Kahn Algo
+        int[]indegree = new int[V];
+        
+        for(int i=0 ; i<V ;i++)
+        {
+            for(int u : adj.get(i))
+            {
+                indegree[u]++;
+            }
+        }
+        
+        Queue<Integer>q = new LinkedList<>();
+        
+        for(int i =0 ; i<V ;i++)
+        {
+            if(indegree[i]==0)
+            q.offer(i);
+        }
+        int[]toposort = new int[V];
+        int k=0;
+        while(!q.isEmpty())
+        {
+            int node = q.remove();
+            toposort[k++]=node;
+            for(int u : adj.get(node))
+            {
+                indegree[u]--;
+                if(indegree[u]==0) q.add(u);
+            }
+        }
+        return toposort;
+        
+        
     }
-   static void dfs(int i , int[]visited , Stack<Integer>st ,ArrayList<ArrayList<Integer>> adj )
+   /*static void dfs(int i , int[]visited , Stack<Integer>st ,ArrayList<ArrayList<Integer>> adj )
     {
         visited[i]=1;
         for(int u : adj.get(i))
@@ -89,5 +123,5 @@ class Solution
         }
         st.push(i);
         return ;
-    }
+    } */
 }
