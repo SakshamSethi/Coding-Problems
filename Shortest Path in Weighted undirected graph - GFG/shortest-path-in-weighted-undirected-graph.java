@@ -30,6 +30,7 @@ import java.io.*;
 
 
 // User function Template for Java
+
 class Pair{
     int first;
     int second;
