@@ -82,7 +82,7 @@ class Solution {
       int cnt =0 ;
       for(int i=0;i<n;i++)
       {
-        if(ds.findUPar(i)==i)cnt++;
+        if(ds.parent.get(i)==i)cnt++;
       }
       return cnt;
     }
