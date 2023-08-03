@@ -10,6 +10,7 @@ class Solution {
         if(bills[i]==5)
         {
             fiveDollor++;
+          continue;
         }
         
         
@@ -21,7 +22,7 @@ class Solution {
         else
         {   fiveDollor--; 
             tenDollor++;
-           
+           continue;
         }   
             
         }
@@ -32,10 +33,12 @@ class Solution {
             {
               tenDollor--;
               fiveDollor--;
+              continue;
             }
          else   if(fiveDollor >= 3)
             {
               fiveDollor-=3;
+           continue;
             }
            
             else
