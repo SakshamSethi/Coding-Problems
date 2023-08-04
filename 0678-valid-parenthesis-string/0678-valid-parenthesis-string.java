@@ -1,16 +1,30 @@
 class Solution {
-    	public boolean checkValidString(String s) {
-        int bal = 0;
-        for (int i = 0; i < s.length(); i++) {
-            if (s.charAt(i) == '(' || s.charAt(i) == '*') bal++;
-            else if (bal-- == 0) return false;
+    public boolean checkValidString(String s) {
+        int leftParen =0 ;
+      int star =0 ;
+      
+      for(char c : s.toCharArray())
+      {
+        if(c=='(') leftParen++;
+        
+        else if(c==')')
+        {
+          if(leftParen>0) leftParen--;
+          else if(star>0) star--;
+          else return false ;
+          
         }
-        if (bal == 0) return true;
-        bal = 0;
-        for (int i = s.length()-1; i >= 0; i--) {
-            if (s.charAt(i) == ')' || s.charAt(i) == '*') bal++;
-            else if (bal-- == 0) return false;
+        else
+        {
+          star++;
+          if(leftParen>0)
+          {
+            leftParen--;
+            star++;
+          }
         }
-        return true;
+        
+      }
+      return leftParen == 0;
     }
 }
