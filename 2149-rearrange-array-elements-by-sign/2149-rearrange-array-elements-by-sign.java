@@ -1,30 +1,23 @@
 class Solution {
     public int[] rearrangeArray(int[] nums) {
+        int n=nums.length;
+      int[]pos = new int[n/2];
+      int[]neg = new int[n/2];
+      int p=0 ; int j=0;
+      for(int ele : nums)
+      {
+        if(ele<0) neg[j++] = ele;
+        else pos[p++] = ele;
         
-        // Brute force approach 
-        // store 2 arrays : 1 for +ve  1 for -ve 
-        //  TC O(N)+O(N) SC: O(N)
-        
-    //Better ?
-    // using 2 pointers for postion checking
-        
-        int pos =0;
-        int neg =1;
-        int n = nums.length;
-        int[] res = new int[n];
-        for(int i=0 ;i<n;i++)
-        {
-            if(nums[i]>0)
-            {
-            res[pos] = nums[i];
-                pos+=2;
-            }
-            else
-            {
-                res[neg]=nums[i];
-                neg+=2;
-            }
-        }
-    return res;
+      }
+      
+      int k=0;
+      
+      for(int i=0 ; i<n/2 ; i++)
+      {
+        nums[k++] = pos[i];
+        nums[k++] =neg[i];
+      }
+      return nums;
     }
 }
