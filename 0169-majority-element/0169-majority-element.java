@@ -1,27 +1,30 @@
 class Solution {
     public int majorityElement(int[] nums) {
-        
-        // Brute Force : O(N^2) 
-        // Better : can use a hashMap for storing frequencies TC: O(n) SC:almost O(n)
-        
-        //Optimal Solution?
-        // Moore's Voting Algo
-        
-        int ele = nums[0];
-        int count = 1;
-        for(int i =1 ;i<nums.length;i++)
+      
+      // HashMap solution 
+      
+      TreeMap<Integer,Integer> map = new TreeMap<>();
+      int ans=-1;
+      for(int i=0 ; i<nums.length ; i++)
+      {
+        if(!map.containsKey(nums[i]))
         {
-            
-            if(ele == nums[i]) count ++;
-            else count --;
-            
-            if(count == 0)
-            {    ele = nums[i];
-                count =1;
-            }
-            
+           map.put(nums[i],1);
+      
         }
-        return ele;
     
+        else {
+               map.put(nums[i] , map.get(nums[i])+1);
+        }
+        
+        if(map.get(nums[i])>nums.length/2)
+        {
+          ans = nums[i];
+          break;
+        }
+      }
+
+      return ans;
+      
     }
 }
