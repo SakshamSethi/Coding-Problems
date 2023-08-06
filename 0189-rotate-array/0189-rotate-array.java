@@ -1,43 +1,29 @@
 class Solution {
     public void rotate(int[] nums, int k) {
-        int n = nums.length;
-        if(n<=1)return;
-      int x=0;
-        // reversing approach 
-x = k%n;
-    int a = 0;
-        int b = n-1;
-          while(a<=b)
-       {
-           swap(nums,a,b);
-           a++;
-           b--;
-       }       
-        
-         a = x;
-         b = n-1;
-
-       while(a<b)
-       {
-           swap(nums,a,b);
-           a++;
-           b--;
-       }
-        a = 0;
-        b = x-1;
-          while(a<b)
-       {
-           swap(nums,a,b);
-           a++;
-           b--;
-       }
-    
+      
+      int n = nums.length;
+   // k should not exceed the range of array
+      int point = (n-k%n) ;
+   
+      reverse(nums,0,point-1);
+      reverse(nums , point , n-1);
+      reverse(nums ,0,n-1);
+      
+      
+      
+      
     }
-    void swap(int[] nums , int a, int b)
+  
+  void reverse(int[] nums , int start , int end)
+  {
+    while(start<end)
     {
-        int temp = nums[a];
-           nums[a] = nums[b];
-           nums[b] = temp;
-        return;
+      int temp = nums[start];
+      nums[start] = nums[end];
+      nums[end] = temp ;
+      
+      start++; 
+      end--;
     }
+  }
 }
