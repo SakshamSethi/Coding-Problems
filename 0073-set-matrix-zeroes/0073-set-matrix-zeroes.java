@@ -20,7 +20,7 @@ class Solution {
           {
             row[i]=1;
             col[j]=1;
-
+            continue;
           }
         }
       }
