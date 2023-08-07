@@ -41,7 +41,7 @@ class Solution {
       
       
       
-      HashSet<Integer> set = new HashSet<>();
+      LinkedHashSet<Integer> set = new LinkedHashSet<>();
       
       for(int num : nums) set.add(num);
       
