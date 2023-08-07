@@ -1,21 +1,27 @@
 class Solution {
     public String interpret(String command) {
-        StringBuffer s = new StringBuffer();
-        for(int i=0;i<command.length();i++)
+      
+      String str = "";
+      StringBuilder ans = new StringBuilder();
+      for(int i=0 ; i<command.length();i++)
+      {
+        str=str+command.charAt(i);
+        if(str.equals("G"))
         {
-            if(command.charAt(i)=='('&&command.charAt(i+1)==')')
-            {
-                s.append('o'); i=i+1;
-            }
-             if(command.charAt(i)=='('&&command.charAt(i+1)=='a')
-             {
-                 s.append("al"); i+=3;
-             }
-            if(command.charAt(i)=='G')
-            {
-                s.append('G');
-            }
+          ans = ans.append("G");
+          str="";
         }
-        return s.toString();
+         if(str.equals("()"))
+        {
+          ans = ans.append("o");
+          str="";
+        }
+        if(str.equals("(al)"))
+        {
+          ans=ans.append("al");
+          str="";
+        }
+      }
+   return   ans.toString();
     }
 }
