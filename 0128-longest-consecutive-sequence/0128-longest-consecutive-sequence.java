@@ -47,7 +47,7 @@ class Solution {
       
       int longest = 1;
       
-      for(int num:nums )
+      for(int num: set )
       {
         if(!set.contains(num-1))
         {
