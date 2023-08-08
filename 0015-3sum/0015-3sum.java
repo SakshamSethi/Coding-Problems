@@ -9,10 +9,10 @@ class Solution {
 
 
       HashSet<List<Integer>> set = new HashSet<>();
-            
+          HashSet<Integer> st = new HashSet<>();    
       for(int i=0 ; i<n ; i++)
       {
-        HashSet<Integer> st = new HashSet<>();
+      
         
         for(int j=i+1 ; j<n ; j++)
         {
@@ -30,6 +30,7 @@ class Solution {
           
           st.add(nums[j]);
         }
+        st.clear();
        
       }
       
