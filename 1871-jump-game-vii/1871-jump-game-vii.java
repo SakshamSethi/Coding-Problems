@@ -14,7 +14,7 @@ class Solution {
           
           int prev = q.peek();
           
-          if(prev>=i-maxJump && prev<=i-minJump)
+          if(prev+minJump<=i && prev+maxJump>=i)
           {
             q.offer(i);
             if(i==s.length()-1)return true;
