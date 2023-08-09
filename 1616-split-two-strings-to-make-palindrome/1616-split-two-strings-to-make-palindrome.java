@@ -1,53 +1,25 @@
-class Solution {
-    public boolean checkPalindromeFormation(String a, String b) {
-        
-        int n = a.length();
-        if(n==1) return true;
-        int s=0;
-        int e=b.length()-1;
-        for(s=0;s<b.length();s++,e--)
-        {
-            if(b.charAt(s)!=a.charAt(e))
-                break;
+ 
+    class Solution {
+        public boolean checkPalindromeFormation(String a, String b) {
+            return check(a, b) || check(b, a);
         }
-        
-        if(e==-1) return true;
-        
-        
-        if(isPalindrome(a,s,e))return true;
-        if(isPalindrome(b,s,e))return true;
-        
-           e=b.length()-1;
-        for(s=0;s<b.length();s++,e--)
-        {
-            if(a.charAt(s)!=b.charAt(e))
-                break;
-        }
-        
-        if(e==-1) return true;
-        
-        
-        if(isPalindrome(a,s,e))return true;
-        if(isPalindrome(b,s,e))return true;
-        
-        
 
-        
-        return false;
+        private boolean check(String a, String b) {
+            int l = 0, r = b.length() - 1;
+            while (l < r && a.charAt(l) == b.charAt(r)) {
+                l++;
+                r--;
+            }
+            if (l >= r) return true;
+            return isPalindrome(a.substring(l, r + 1)) || isPalindrome(b.substring(l, r + 1));
+        }
+
+        private boolean isPalindrome(String s) {
+            int l = 0, r = s.length() - 1;
+            while (l < r && s.charAt(l) == s.charAt(r)) {
+                l++;
+                r--;
+            }
+            return l >= r;
+        }
     }
- boolean isPalindrome(String s,int st,int e)
- {
-    
-     
-    while(st<=e)
-    {
-        if(s.charAt(st)!=s.charAt(e))
-            return false;
-    
-        st++;
-        e--;
-    }
-     return true;
- }
-    
-}
