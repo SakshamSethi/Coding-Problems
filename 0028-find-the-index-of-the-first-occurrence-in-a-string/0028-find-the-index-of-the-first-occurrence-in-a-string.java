@@ -1,7 +1,9 @@
 class Solution {
     public int strStr(String haystack, String needle) {
     
-      int n = haystack.length();
+      return haystack.indexOf(needle);
+      
+     /* int n = haystack.length();
       int m = needle.length();
     
        if(m>n)return -1; 
@@ -18,6 +20,6 @@ class Solution {
         
       }
       return -1 ;
-        
+       */ 
     }
 }
