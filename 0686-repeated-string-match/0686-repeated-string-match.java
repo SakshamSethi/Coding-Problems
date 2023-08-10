@@ -11,7 +11,7 @@ class Solution {
       
       while(str.length()<n2)
       {
-        if(str.contains(b)) break;
+        
         
         str+=a;
         times++;
