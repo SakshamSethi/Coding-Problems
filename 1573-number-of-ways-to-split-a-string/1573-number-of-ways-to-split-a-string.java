@@ -1,19 +1,40 @@
 class Solution {
+  int mod = (int)(Math.pow(10,9)+7);
     public int numWays(String s) {
-        long res = 0, n = s.length(), mod = 1_000_000_007, cntOnes = 0;
-        if (n < 3) return 0;
-        for (int i = 0; i < n; i++) if (s.charAt(i) == '1') cntOnes++;
-        if (cntOnes % 3 != 0) return 0;
-        if (cntOnes == 0) return (int) ((n - 1) * (n - 2) / 2 % mod); // combinations, select 2 slots from n - 1 slots;
-        long firstZeros = 0, secondZeros = 0, avg = cntOnes / 3, prefixOnes = 0;
-        for (int i = 0; i < n; i++) {
-            char c = s.charAt(i);
-            if (c == '1') prefixOnes++;
-            else {
-                if (prefixOnes == avg) firstZeros++; // btwn s1 and s2;
-                else if (prefixOnes == avg * 2) secondZeros++; // btwn s3 and s2;
-            }
+        
+      long countOnes =0;
+      long n =s.length()%mod;
+      if(n<3)return 0;
+      for(int i=0 ;i<n;i++)
+      {
+        if(s.charAt(i)=='1')countOnes++;
+      }
+        if(countOnes%3!=0)return 0;
+      
+      if(countOnes==0)
+     return (int) ((n - 1) * (n - 2) / 2 % mod);
+      
+      // we have to maintain the number of splits we can do for s1 and s2  after providing equal ones in each
+      
+      
+      long averageOnes = countOnes/3;
+      
+      long firstBlockSplits = 1;
+      long secondBlockSplits =1;
+      
+      long prefixOnesCount=0;
+      
+      for(char len : s.toCharArray())
+      {
+        if(len=='1')prefixOnesCount++;
+        else
+        {
+          if(prefixOnesCount==averageOnes) firstBlockSplits++;
+          if(prefixOnesCount==2*averageOnes) secondBlockSplits++;
         }
-        return (int) (++firstZeros * ++secondZeros % mod);  // two 0s form 3 slots
+      }
+      
+      return (int)(((firstBlockSplits%mod)*(secondBlockSplits%mod))%mod);
+      
     }
 }
