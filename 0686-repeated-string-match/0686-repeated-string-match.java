@@ -1,29 +1,16 @@
 class Solution {
-    public int repeatedStringMatch(String a, String b) {
-        
-      int n1 = a.length();
-      int n2 = b.length();
-      if(a.contains(b))return 1;
-       
-      String str = "";
-      
-      int times=0;
-      
-      while(str.length()<n2)
-      {
-        
-        
-        str+=a;
-        times++;
-        
-      }
-      if(str.contains(b))return times;
-      
-      str+=a;
-      times++;
-      
-      return str.contains(b)?times:-1;
-      
-             
+       public int repeatedStringMatch(String A, String B) {
+        int i = 0, j = 0;
+        while (i < A.length()) {
+            j = 0;
+            while (j < B.length() && A.charAt((i + j) % A.length()) == B.charAt(j)) {
+                j++;
+            }
+            if (j == B.length()) {
+                return (i + j) / A.length() + ((i + j) % A.length() == 0 ? 0 : 1);
+            }
+            i++;
+        }
+        return -1;
     }
 }
