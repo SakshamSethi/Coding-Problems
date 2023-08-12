@@ -1,14 +1,14 @@
 class Solution {
     public int maximumRemovals(String s, String p, int[] removable) {
       
-      int n = removable.length;
+      
       
             
       
      char[] letters = s.toCharArray();
       
       int low=0;
-      int end = n ;
+      int end = removable.length ;
       
       while(low<=end)
       {
