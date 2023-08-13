@@ -13,7 +13,7 @@ class Solution {
     
     private String invert(StringBuilder s) {
         StringBuilder sb = new StringBuilder();
-        for (int l = s.length(), i = l - 1; i >= 0; i--) {
+        for (int i=s.length()-1 ; i >= 0; i--) {
             sb.append(s.charAt(i) == '0' ? '1' : '0');
         }
         return sb.toString();
