@@ -98,12 +98,8 @@ class Solution {
           prevOp = curChar;
           curNum=0;
         }
-        
-        
+         
       }
-      
       return result;
-      
-    
     }
 }
