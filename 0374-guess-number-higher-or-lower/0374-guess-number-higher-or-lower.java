@@ -9,26 +9,24 @@
 
 public class Solution extends GuessGame {
     public int guessNumber(int n) {
+      
+      int s =1;
+      int e = n;
+      
+      while(s<=e)
+      {
+        int mid = s +(e-s)/2;
         
-     
-       int s = 1;
-        int e = n;
-   
-       int m=0;
+        int guessedNumber = guess(mid);
         
-        while(s<=e)
-        {
-           m = s+(e-s)/2;
-            
-            if(guess(m) == 0)
-               return m;
-            if(guess(m)==-1)
-                e=m-1;
-            if(guess(m)==1)
-                s=m+1;
-            
-        }
-     
-        return -1;
+        if(guessedNumber==0) return mid ;
+        
+        else if(guessedNumber==-1)e = mid-1;
+        
+        else s= mid +1 ;
+        
+      }
+        return 0;
+      
     }
 }
