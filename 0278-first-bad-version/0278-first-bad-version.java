@@ -4,27 +4,27 @@
 public class Solution extends VersionControl {
     public int firstBadVersion(int n) {
         
-        int s=1;
-      
-        int m=0;
-        int x=0;
-        while(s<=n)
-        {
-            m = s+(n-s)/2;
-            System.out.println(m);
-            if(isBadVersion(m)==true)
-            {
-                x = m;
-                n = m-1;
-            }
-            else
-            {
-                s=m+1;
-            }
-            
-          
-        }
-        return x;
+      long start = 1;
+      long end = n;
+      long ans =0;
+      while(start<=end)
+      {
+        long mid = start + (end-start)/2;
+         
+        boolean isBad = isBadVersion((int)mid);
         
+        if(isBad) {
+          ans = mid ;
+          end = mid-1;
+        }
+        else
+        {
+          start=mid+1;
+        }
+        
+        
+      }
+      
+      return (int)ans;
     }
 }
