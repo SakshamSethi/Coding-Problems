@@ -1,15 +1,46 @@
 class Solution {
-  public int[] intersection(int[] nums1, int[] nums2) {
-    HashSet<Integer> set1 = new HashSet<Integer>();
-    for (Integer n : nums1) set1.add(n);
-    HashSet<Integer> set2 = new HashSet<Integer>();
-    for (Integer n : nums2) set2.add(n);
-
-    set1.retainAll(set2);
-
-    int [] output = new int[set1.size()];
-    int idx = 0;
-    for (int s : set1) output[idx++] = s;
-    return output;
+    public int[] intersection(int[] nums1, int[] nums2) {
+      
+      
+      
+      Arrays.sort(nums1);
+      HashSet<Integer> hs = new HashSet();
+      
+      for(int ele : nums2)
+      {
+        if(binarySearch(nums1,ele)) hs.add(ele);
+         
+      }
+      
+      int[]ans = new int[hs.size()];
+      
+      int k=0;
+      
+      for(int ele : hs)
+        ans[k++] = ele;
+      
+      return ans;
+      
+      
+      
+    }
+  boolean binarySearch(int[]nums , int target)
+  {
+    int start = 0 ;
+    int end = nums.length-1;
+    
+    int mid = 0;
+    
+    while(start<=end)
+    {
+      mid = start+(end-start)/2;
+      
+      if(nums[mid]==target) return true;
+      
+      else if (nums[mid]>target)end=mid-1;
+      else start = mid+1;
+    }
+    return false;
   }
+  
 }
