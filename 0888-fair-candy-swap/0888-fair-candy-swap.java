@@ -42,8 +42,8 @@ class Solution {
       
       for(int ele : bob)
       {
-        int res = binarySearch(alice,D+ele);
-        if(res!=-1) return new int[]{res,ele};
+       
+        if( binarySearch(alice,D+ele)!=-1) return new int[]{ele+D,ele};
       }
       
       return new int[]{-1,-1}; // dummy as the question guarenteed to have atlease 1 pair  
