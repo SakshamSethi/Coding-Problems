@@ -1,6 +1,6 @@
 class Solution {
     public int findMin(int[] nums) {
-        
+        // pivot ka next element return karna hai ! 
         int s=0;
         int e = nums.length-1;
         int m=0;
