@@ -1,22 +1,48 @@
 class Solution {
     public int minEatingSpeed(int[] piles, int h) {
-        long left = 1;
-        long right = 1000000000;
+    
+      long lowerBound = 1;
+      long upperBound = (long)1e9;
+      
+      long k = 0;
+      
+      while(lowerBound<=upperBound)
+      {
+          
+        long mid = lowerBound + (upperBound-lowerBound)/2;
         
-        while(left <= right){
-            long  mid = left + (right - left) / 2;
-            if(canEatInTime(piles, mid, h)) right = mid - 1;
-            else left = mid + 1;
+        if(canEatBananas(piles,mid,h))
+        {
+          k = mid ;
+         upperBound = mid-1;
         }
-        return (int)left;
-    }
-    public boolean canEatInTime(int piles[], long k, long h){
-        long hours = 0;
-        for(int pile : piles){
-            long div = (long)pile / k;
-            hours += div;
-            if(pile % k != 0) hours++;
+        else
+        {
+          lowerBound=mid+1;
         }
-        return hours <= h;
+        
+        
+      }
+      
+      return (int)k;
     }
+  
+  boolean canEatBananas(int[]piles,long k , int h)
+  {
+  long hoursTaken = 0;
+    
+    for(int pile : piles)
+    {
+      
+      long div = (long)pile/k;
+      
+      hoursTaken+=div;
+      
+      if(pile%k!=0)hoursTaken++;
+      
+    }
+    return hoursTaken<=h;
+    
+  }
+  
 }
