@@ -1,49 +1,79 @@
 class Solution {
     public int maxValue(int n, int index, int maxSum) {
         
-        long l = index ;
-        long r = n-index-1;
-        long e = maxSum , s=1 , res =0;
+      // binary search logic :
+      
+ /*
+ what we have to do is , we have to find the maximum possible element at the given index 
+ 
+ */     
+  
+      
+      int emptyRightElements = n-index-1;
+      int emptyLeftElements = index ;
+      
+      
+      // create a range of minimum and maximum ele you could have at the index
+      
+      
+      int lowerBound = 1;
+      int upperBound = maxSum ;
+      
+      
+      int result = 0;
+      
+      while(lowerBound<=upperBound)
+      {
+        int mid = lowerBound + (upperBound-lowerBound)/2;
         
-        while(s<=e)
+        long totalSum = 0;
+        long element = mid-1;
+        long rightSum =0 , leftSum=0;
+        
+        if(element>=emptyRightElements)
         {
-            long mid = s +(e-s)/2;
-            long m = mid-1;
-            long ls=0 , rs=0;
-            long sum = mid;
-            
-            if(r<=m)
-            {
-                rs = m*(m+1)/2 - (m-r)*(m-r+1)/2;
-            }
-            else 
-            {
-                rs  = m*(m+1)/2 + (r-m)*1;
-            }
-             if(l<=m)
-            {
-                ls = m*(m+1)/2 - (m-l)*(m-l+1)/2;
-            }
-            else 
-            {
-                ls  = m*(m+1)/2 + (l-m)*1;
-            }
-            
-            sum+=ls+rs;
-            
-            if(sum<=maxSum)
-            {
-                res = mid;
-                s = mid+1;
-            }
-            else
-            {
-                
-                e = mid-1;
-                
-            }
-            
+          // i have to calculate the sum of RHS as
+          
+          rightSum = (element*(element+1)/2) -  ( (element-emptyRightElements)*(element-emptyRightElements+1)/2);
+          
+          
         }
-        return (int)res;
+        else
+        {
+           rightSum = (element*(element+1)/2) + (emptyRightElements-element); 
+        }
+        
+        
+        // similarly can do the same for the LHS elements
+        
+          if(element>=emptyLeftElements)
+        {
+          // i have to calculate the sum of LHS as
+          
+          leftSum =  (element*(element+1)/2) -  ( (element-emptyLeftElements)*(element-emptyLeftElements+1)/2);
+          
+          
+        }
+        else
+        {
+           leftSum = (element*(element+1)/2) + (emptyLeftElements-element); 
+        }
+        
+        totalSum = leftSum+rightSum+mid;
+        
+        if(totalSum<=maxSum)
+      {
+        result = mid ;
+        lowerBound = mid+1;
+      }
+      else
+      {
+        upperBound = mid-1;
+      }
+        
+      }
+      
+     return result ;
+      
     }
 }
