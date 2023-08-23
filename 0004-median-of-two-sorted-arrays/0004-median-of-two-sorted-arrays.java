@@ -26,8 +26,7 @@ class Solution {
         int r1 = Integer.MAX_VALUE , r2 = Integer.MAX_VALUE;
         
         // check for boundary cases 
-        
-        
+
         if(mid1>0) l1 = nums1[mid1-1];
         if(mid2>0) l2 = nums2[mid2-1];
         
