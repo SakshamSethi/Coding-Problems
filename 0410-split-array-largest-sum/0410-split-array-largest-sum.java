@@ -1,40 +1,61 @@
 class Solution {
     public int splitArray(int[] nums, int k) {
-        int start=0;
-        int end=0;
-        for(int i=0;i<nums.length;i++)
+        
+      
+      // calculate the min and max possible largest sum of subarrays 
+      
+      // we can have atmost n spilts and atleast 1 split 
+      // 1 spit --> ans for ques will be sum of all elements , max possible largest sum 
+      // n splits --> ans for the question will be the largest element in the array , min possible largest sum
+      
+      
+      int minAns = -1;
+      int maxAns = 0;
+      
+      for(int num : nums)
+      {
+        minAns = Math.max(num,minAns);
+        maxAns +=num;
+      }
+      
+      // check for the pieces thing
+      
+      int potentialAns = 0;
+      
+      while(minAns<=maxAns)
+      {
+        int mid = minAns + (maxAns-minAns)/2;
+        
+        // check how many pieces will this sum split out array into 
+        
+        int pieces = 1;
+        int sum = 0;
+        for(int num : nums)
         {
-            start = Math.max(start,nums[i]);
-            end+=nums[i];
+          sum+=num;
+          
+          if(sum>mid) 
+          {
+            pieces++;
+            sum = num;
+          }
+          
         }
-        while(start<end)
+        
+        // if the pieces satisfy the question's input or not 
+        
+        if(pieces<=k)
         {
-            
-            int mid = start + (end-start)/2;
-            int sum=0;
-            int pieces=1;
-            for(int num : nums)
-            {
-                if(sum + num > mid)
-                {
-                    sum = num;
-                    pieces++;
-                }
-                else
-                { sum += num;
-                }
-            }
-            if(pieces>k)
-            {
-                start =mid+1;
-            }
-            else {
-                
-                end=mid;
-            }
-            
-            
+          potentialAns = mid ;
+          maxAns = mid-1;
         }
-        return end;
+        else
+        {
+          minAns = mid+1;
+        }
+        
+        
+      }
+      return potentialAns;
     }
 }
