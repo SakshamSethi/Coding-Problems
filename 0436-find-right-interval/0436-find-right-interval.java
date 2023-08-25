@@ -1,66 +1,65 @@
 class Solution {
     public int[] findRightInterval(int[][] intervals) {
-     HashMap<Integer,Integer> map = new HashMap<>();
-        int n=intervals.length;
-     int arr[] = new int[n];
-        int ans[] = new int[n];
-        for(int i=0;i<n;i++)   
-     {
-         arr[i] = intervals[i][0];
-            map.put(arr[i],i);
-     }
-        Arrays.sort(arr);
+      
+      // what we can do is !!!!
+      // we can store all the starting intervals in an separate array 
+      // we can store these intervals along with thier orignal indexes in a map and then we can sort the array in which we have stored the starting index and then we can perform a binary search for each end interval to find out its floor int the array and can fetch its orignal index from the map to return the ans!
+      
+      
+      
+      int n = intervals.length;
+      
+      int[] arr = new int[n];
+      
+      int[] ans = new int[n];
+      
+      HashMap<Integer,Integer> hmap = new HashMap<>();
+      
+      for(int i = 0 ; i<n ; i++)
+      {
+        arr[i] = intervals[i][0] ; 
         
-        for(int i=0;i<n;i++)
-        {
-            ans[i] = BS(arr,map,intervals[i][1],n);
-            
-        }
-        return ans;
+        hmap.put(arr[i] , i);
+      }
+      
+      Arrays.sort(arr);
+      
+      for(int i=0 ; i<n;i++)
+      {
+        ans[i] = binarySearch(arr,intervals[i][1],i,hmap);
+      }
+      
+      return ans;
         
+    }
+  
+  int binarySearch(int[] arr , int target , int ind ,HashMap<Integer,Integer>hmap)
+  {
+    
+    int index = -1 ;
+    
+    int start = 0;
+    int end = arr.length-1;
+    
+    while(start<=end)
+    {
+      int mid = start + (end-start)/2;
+ 
+      
+      if(arr[mid]>=target)
+      {
+        index = mid;
+        end = mid-1;
+      }
+      else
+      {
+        start = mid+1;
+      }
+      
     }
     
-    static int BS(int[] arr , HashMap map , int target , int n)
-    {
-        int s =0;
-        int e = n-1;
-        int x=Integer.MIN_VALUE;int flag=1;
-        while(s<=e)
-        { 
-            int m= s +(e-s)/2;
-            if(target == arr[m])
-            {
-                x=arr[m];
-                break;
-            }
-            
-            if(arr[m]<target)
-            {
-                s=m+1;
-            }
-            else
-            {
-                if(flag==1){
-                    x= arr[m];
-                }
-                else
-                {
-                    if(x>arr[m])
-                        x=arr[m];
-                }
-                
-                e=m-1;
-                
-                    
-                
-                
-            }
-            
-        }
-        if(x== Integer.MIN_VALUE) return -1;
-           
-    return (int)map.get(x);
-        
-        
-    }
+    return index==-1?-1:(int)hmap.get(arr[index]);
+    
+  }
+  
 }
