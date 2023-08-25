@@ -1,28 +1,33 @@
 class Solution {
     public int specialArray(int[] nums) {
+      
+      int start = 0;
+      int end = nums.length;
+      
+      while(start<=end)
+      {
+        int mid = start+(end-start)/2;
         
-        int n=nums.length;
-             int x=1;
-        for(int i=0;i<n;i++)
-        {
-   
-            int count=0;
-            
-                for(int j=0;j<n;j++)
-                {
-                  
-                    if(x<=nums[j])
-                    {
-                        count++;
-                    }
-                }
-                if(count==x)
-                {
-                    return x;
-                }
-            x++;
-        }
+        int currentCount = countGreater(nums,mid);
         
-        return -1;
+        if(currentCount==mid)return mid;
+        
+        else if(currentCount>mid) start=mid+1;
+        else end=mid-1;
+        
+      }
+      
+      return -1;
+      
     }
+  int countGreater(int[]nums , int target)
+  {
+    int cnt =0;
+    for(int ele:nums)
+    {
+      if(ele>=target) cnt++;
+      
+    }
+    return cnt;
+  }
 }
