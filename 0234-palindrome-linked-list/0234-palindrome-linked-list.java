@@ -21,8 +21,7 @@ class Solution {
         start=start.next;
         end=end.next;
       }
-      
-      if( end!=null)return false;
+    
       
       return true;
       
