@@ -21,10 +21,13 @@ public class Solution {
         
         slow=slow.next;
         fast=fast.next.next;
+        
+        if(slow==fast)return true;
+        
       }while(slow!=fast && fast!=null &&fast.next!=null);
       
-      if(fast==null || fast.next==null)return false;
-      return slow==fast;
+     
+     return false;
       
     }
 }
