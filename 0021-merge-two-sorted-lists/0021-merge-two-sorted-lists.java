@@ -10,37 +10,67 @@
  */
 class Solution {
     public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
-        
-        ListNode ans = new ListNode();
-        ListNode temp = ans;
-        
-        while(list1!=null && list2!=null)
+      
+        ListNode head = null;
+        ListNode travel = null;
+      while(list1!=null && list2!=null)
+      {
+        if(head==null)
         {
-            if(list1.val < list2.val)
+            if(list1.val<=list2.val)
             {
-                temp.next = list1;
-                list1 = list1.next;
-                temp = temp.next;
+              head = list1;
+              list1=list1.next;
             }
-            else
-            {
-                temp.next = list2;
-                list2 = list2.next;
-                temp = temp.next;
-            }
+          else
+          {
+            head = list2;
+            list2=list2.next;
+          }
+          travel = head;
+          continue;
         }
-        while(list1!=null)
+        
+        if(list1.val<=list2.val)
         {
-            temp.next = list1;
-            list1 = list1.next;
-            temp = temp.next;
+          travel.next = list1;
+          travel = travel.next;
+          list1=list1.next;
         }
-         while(list2!=null)
+        else
         {
-            temp.next = list2;
-            list2 = list2.next;
-            temp = temp.next;
+            travel.next = list2;
+          travel = travel.next;
+          list2=list2.next;
         }
-        return ans.next;
+        
+      }
+      
+      while(list1!=null)
+      {
+        if(head==null)
+        {
+              head = list1;
+              list1=list1.next;
+travel=head;
+          continue;
+        }
+        travel.next = list1;
+        travel=travel.next;
+        list1=list1.next;
+      }
+          while(list2!=null)
+      {if(head==null)
+        {
+              head = list2;
+              list2=list2.next;
+              travel = head;
+          continue;
+        }
+        travel.next = list2;
+        travel=travel.next;
+        list2=list2.next;
+      }
+      return head ;
     }
 }
