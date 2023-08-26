@@ -14,7 +14,7 @@ class Solution {
       ListNode  mid = getMiddle(head);
       ListNode start = head;
       ListNode end =  reverseList(mid);
-      System.out.println(mid.val);
+   
       while(start!=null && end!=null)
       {
         if(start.val!=end.val)return false;
