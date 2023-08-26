@@ -10,45 +10,54 @@
  */
 class Solution {
     public boolean isPalindrome(ListNode head) {
-     if(head.next==null || head==null)return true;
-        ListNode one = head;
-        ListNode two = head;
-        while(two!=null && two.next!=null)
-        {
-            one = one.next;
-            two=two.next.next;
-        }
-        ListNode h2 = reverse(one);
-        
-        ListNode first = head;
-        ListNode second = h2;
-        while(second!=null)
-        {
-            if(first.val!=second.val)
-            {
-                return false;
-            }
-            first=first.next;
-            second=second.next;
-        }
-        return true;
-        
-        
+      
+      ListNode  mid = getMiddle(head);
+      ListNode start = head;
+      ListNode end =  reverseList(mid);
+      System.out.println(mid.val);
+      while(start!=null && end!=null)
+      {
+        if(start.val!=end.val)return false;
+        start=start.next;
+        end=end.next;
+      }
+      
+      if( end!=null)return false;
+      
+      return true;
+      
+      
     }
-    public ListNode reverse(ListNode head)
+  ListNode reverseList(ListNode head)
+  {
+    if(head==null || head.next==null)return head;
+    ListNode prev = null;
+    ListNode next = head.next;
+    ListNode curr = head;
+    
+    while(next!=null)
     {
-        if(head.next==null)return head;
-        ListNode curr=head;
-        ListNode prev=null;
-        ListNode next=curr.next;
-        
-        while(next!=null)
-        {
-            next=curr.next;
-            curr.next=prev;
-            prev=curr;
-            curr=next;
-        }
-        return prev;
+      next = curr.next;
+      curr.next = prev;
+      prev = curr;
+      curr=next;
+      
     }
+    return prev;
+    
+  }
+  
+  
+  ListNode getMiddle(ListNode head)
+  {
+    ListNode fast = head;
+    ListNode slow = head;
+    
+    while(fast!=null && fast.next!=null)
+    {
+      slow = slow.next;
+      fast = fast.next.next;
+    }
+    return slow;
+  }
 }
