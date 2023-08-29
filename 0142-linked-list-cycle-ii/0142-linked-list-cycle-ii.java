@@ -11,52 +11,46 @@
  */
 public class Solution {
     public ListNode detectCycle(ListNode head) {
-        
-        ListNode slow = head;
-        ListNode fast = head;
-        
-        int length=0;
-        while(fast!=null && fast.next!=null)
-        {
-        
-            slow=slow.next;
-            fast = fast.next.next;
-            if(slow==fast)
-            {
-                length = Length(slow);
-                break;
-            }
-        }
-        
-        if(length==0) return null;
-        
-        ListNode first = head;
-        ListNode second = head;
-        
-        while(length>0)
-        {
-            second=second.next;
-            length--;
-        }
-        while(first!=second)
-        {
-            first=first.next;
-            second=second.next;
-        }
-        return first;
-        
-    }
+      
+      int lengthOfCycle = cycleLength(head);
     
-    public int Length(ListNode h)
-    {
-        ListNode temp = h;
-        int l=0;
-        do
-        {
-            temp = temp.next;
-            l++;
-        }while(temp!=h);
-        return l;
-            
+      if(lengthOfCycle==-1) return null;
+      
+      ListNode first = head;
+      ListNode second = head;
+      
+      for(int i=0; i<lengthOfCycle;i++)
+      {
+        second=second.next;
+      }
+      
+      while(first!=second)
+      {
+        first=first.next;
+        second=second.next;
+      }
+      return first; // or you can aslo return second 
     }
+  int cycleLength(ListNode head)
+  {
+    if(head==null || head.next==null) return -1;
+    ListNode fast = head;
+    ListNode slow = head;
+    int size=0;
+    do
+    {
+      fast = fast.next.next;
+      slow=slow.next;
+    }while(fast!=null && fast.next!=null &&fast!=slow);
+    
+    if(fast!=slow)return -1;
+      
+     do
+     {
+       fast=fast.next;
+       size++;
+     }while(fast!=slow);
+      
+    return size;
+  }
 }
