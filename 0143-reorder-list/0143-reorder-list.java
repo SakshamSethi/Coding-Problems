@@ -10,62 +10,68 @@
  */
 class Solution {
     public void reorderList(ListNode head) {
-        if(head==null || head.next==null)return;
-        
-        ListNode mid  = middle(head);
-        
-        ListNode second = reverse(mid);
-        
-        ListNode temp = null, first=head;
-        
-        while(first!=null && second!=null)
-        {
-            temp = first.next;
-            
-            first.next = second;
-            first = temp;
-            
-            temp = second.next;
-            second.next = first;
-            second=temp;
-            
-        }
-        
-       if(first!=null) first.next =null;
-        
-        
-        
+    
+      if(head==null || head.next==null)return ;
       
+      ListNode cur = midPoint(head);
+      
+     
+      
+     
+      
+      ListNode prev = null;
+      ListNode next = cur.next;
+      
+      // reverse
+      
+      while(next!=null)
+      {
+        next=cur.next;
+        cur.next  = prev;
+        prev = cur;
+        cur=next;
+      }
+      
+      
+      ListNode first = head;
+      ListNode second = prev;
+      
+      ListNode temp =null;
+      
+      while(first!=null && second!=null)
+      {
+        temp = first.next;
         
+        first.next = second;
+        first = temp;
+        
+        if(second.next==null)break;
+        
+        temp = second.next;
+        second.next=first;
+        second=temp;
+        
+      }
+      
+      return;
+    }
+  
+  ListNode midPoint(ListNode head)
+  {
+    
+    ListNode prev = null;
+    ListNode slow = head;
+    ListNode fast = head;
+    
+    while(fast!=null && fast.next!=null)
+    {
+      prev = slow;
+      slow=slow.next;
+      fast = fast.next.next;
+      
     }
     
-    public ListNode middle(ListNode head)
-    {
-        ListNode one = head;
-        ListNode two = head;
-        while(two!=null && two.next!=null)
-        {
-            one = one.next;
-            two = two.next.next;
-            
-        }
-        return one;
-        
-    }
-    public ListNode reverse(ListNode head)
-    {
-        if(head==null||head.next==null)return head;
-        ListNode prev = null , curr = head,next=head.next;
-        
-        while(next!=null)
-        {
-            next = curr.next;
-            curr.next =prev;
-            prev = curr;
-            curr = next;
-            
-        }
-        return prev;
-        
-    }
+  return slow;
+  }
+  
 }
