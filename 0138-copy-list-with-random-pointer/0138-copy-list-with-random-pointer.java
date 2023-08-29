@@ -20,8 +20,60 @@ class Solution {
         
  
 
+         // optimized solution :
       
       
+      // 3 iterations 
+      
+      //--> first restructure the LL 
+      // --> assign random pointers
+      // --> separate both lists 
+      
+      Node temp = head;
+      
+      while(temp!=null)
+      {
+        Node node = new Node(temp.val);
+        
+        node.next = temp.next;
+        temp.next=node;
+        temp = temp.next.next;
+      }
+      
+      temp = head;
+      while(temp!=null && temp.next!=null)
+      {
+       temp.next.random =  (temp.random!=null)? temp.random.next : null ;
+        
+        temp = temp.next.next;
+        
+      }
+      
+      Node orignal = head;
+      Node copy = head.next;
+      Node copyHead = copy;
+      
+      while(orignal!=null )
+      {
+        orignal.next = orignal.next.next;
+         
+            
+         
+            if(copy.next== null){
+                break;
+            } 
+        copy.next=copy.next.next;
+        
+        orignal = orignal.next;
+        copy=copy.next;
+        
+      }
+      
+      return copyHead;
+      
+      
+      
+    /*// With Space   
       
       Node temp = head;
       int size = listLength(head);
@@ -94,10 +146,13 @@ class Solution {
   }
     
     return dummy.next;
+    */
+    
+    
     
     }
   
-  private int listLength(Node head)
+ /* private int listLength(Node head)
   {
     int size = 1;
     Node temp = head;
@@ -107,6 +162,7 @@ class Solution {
       size++;
     }
     return size;
-  }
+  
+  }*/
   
 }
