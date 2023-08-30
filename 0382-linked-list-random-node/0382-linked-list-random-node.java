@@ -10,30 +10,33 @@
  */
 class Solution {
 
-    ListNode head;
-    int length;
+  //reservoir sampling
+  ListNode head ;
+  Random rand;
+  
     public Solution(ListNode head) {
-        this.head=head;
-      ListNode temp = head;
-        length=1;
-      while(temp.next!=null)
-      {
-        temp=temp.next;
-        length++;
-      }
+      
+      this.head = head;
+      rand = new Random();
+      
     }
     
     public int getRandom() {
       
-      int randIndex = (int)(Math.random()*length);
+      ListNode curr = head;
       
-      ListNode temp = head;
-      for(int i = 0 ; i<randIndex;i++)
+      int ans = curr.val;
+      int i=1;
+      while(curr.next!=null)
       {
-        temp=temp.next;
+        curr=curr.next;
+        
+        if(rand.nextInt(i+1)==i) ans = curr.val; 
+        
+        i++;
+     
       }
-      
-      return temp.val;
+      return ans;
     }
 }
 
