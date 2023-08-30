@@ -11,32 +11,37 @@
 class Solution {
     public ListNode partition(ListNode head, int x) {
         
-       ListNode list = new ListNode(0,null);
-        ListNode ans = list;
-        ListNode ret = ans;
-        ListNode temp = head;
-        while(temp!=null)
+      // firstly take all the lesser elements
+      
+      ListNode dummy = new ListNode();
+      ListNode curr = dummy;
+      ListNode temp = head;
+      
+      while(temp!=null)
+      {
+        if(temp.val<x)
         {
-            if(temp.val<x)
-            {
-                ListNode node = new ListNode(temp.val,null);
-                ans.next = node;
-                ans = ans.next;
-            }
-            
-            temp = temp.next;
+          ListNode node = new ListNode(temp.val);
+          curr.next=node;
+          curr=node;
+          
         }
-        temp = head;
-        while(temp!=null)
+        temp = temp.next;
+      }
+      
+      temp = head;
+      
+         while(temp!=null)
+      {
+        if(temp.val>=x)
         {
-            if(temp.val>=x)
-            {   ListNode node = new ListNode(temp.val,null);
-                ans.next = node;
-              ans = ans.next;
-            }
-              temp=temp.next;
+          ListNode node = new ListNode(temp.val);
+          curr.next=node;
+          curr=node;
+          
         }
-        
-        return ret.next;
+        temp = temp.next;
+      }
+      return dummy.next;
     }
 }
