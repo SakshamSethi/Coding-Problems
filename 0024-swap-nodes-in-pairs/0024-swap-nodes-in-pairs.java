@@ -13,7 +13,48 @@ class Solution {
      
       if(head==null || head.next==null) return head;
       
-      ListNode dummyFirst = new ListNode();
+      
+      // without extra space 
+      
+      //using a dummy pointer for helping in changing nodes
+      
+      ListNode dummy = new ListNode();
+      
+      dummy.next=head;
+      
+      ListNode node = dummy;
+    
+      while(node!=null)
+      {
+          ListNode first = node.next;
+          ListNode second = null;
+        
+        if(first!=null) second = first.next;
+        
+        ListNode secondNext = null;
+        
+        if(second!=null)
+        {
+          secondNext = second.next;
+          
+          second.next = first;
+          node.next=second;
+          first.next = secondNext;
+          
+        }
+        else
+        {
+          break;
+        }
+        
+        node=first;
+      }
+      
+      return dummy.next;
+      // with extra space
+      
+      
+      /*ListNode dummyFirst = new ListNode();
       ListNode dummySecond = new ListNode();
       ListNode first = dummyFirst;
       ListNode second = dummySecond;
@@ -55,6 +96,6 @@ class Solution {
        
       }
       
-      return dummySecond.next;
+      return dummySecond.next;*/
     }
 }
