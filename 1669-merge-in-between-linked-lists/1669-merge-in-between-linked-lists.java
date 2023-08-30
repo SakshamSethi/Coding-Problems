@@ -13,11 +13,11 @@ class Solution {
         
       if(list1==null || list2==null)return list1;
       
-      ListNode node = list1;
-      ListNode start = null;
-      ListNode end = null;
+     // ListNode node = list1;
+    //  ListNode start = null;
+    //  ListNode end = null;
       int len=0;
-      while(node!=null)
+     /* while(node!=null)
       {
         if(start!=null && end!=null) break;
         
@@ -41,6 +41,28 @@ class Solution {
       
       temp.next = end;
       
+      return list1;
+      */
+      // use for loop for better time 
+      
+      ListNode end = list1;
+     ListNode start = null;
+    
+      for(int i=0 ; i<b && end!=null ; i++)
+      {
+        if(i+1==a)
+        {
+          start=end;
+        }
+        end=end.next;
+      }
+      end = end.next;
+      ListNode temp = list2;
+      
+      while(temp.next!=null)temp=temp.next;
+      
+      start.next=list2;
+      temp.next=end;
       return list1;
       
     }
