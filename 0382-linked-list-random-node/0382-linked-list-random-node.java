@@ -9,29 +9,31 @@
  * }
  */
 class Solution {
-  
-    ArrayList<Integer> arr ;
-    int size ;  
-  public Solution(ListNode head) {
-        arr = new ArrayList<>();
-        
-        ListNode node = head;
-    while(node!=null)
-    {
-      arr.add(node.val);
-      node=node.next;
-    }
-    size = arr.size();
-      
+
+    ListNode head;
+    int length;
+    public Solution(ListNode head) {
+        this.head=head;
+      ListNode temp = head;
+        length=1;
+      while(temp.next!=null)
+      {
+        temp=temp.next;
+        length++;
+      }
     }
     
     public int getRandom() {
       
-      int randomIndex = (int)(Math.random()*size);
+      int randIndex = (int)(Math.random()*length);
       
-      return arr.get(randomIndex);
+      ListNode temp = head;
+      for(int i = 0 ; i<randIndex;i++)
+      {
+        temp=temp.next;
+      }
       
-      
+      return temp.val;
     }
 }
 
