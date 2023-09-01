@@ -10,44 +10,46 @@
  */
 class Solution {
     public int[] nodesBetweenCriticalPoints(ListNode head) {
-     ;
-  
-        if(head==null||head.next==null||head.next.next==null)
-            return new int[]{-1,-1};
         
-        
-        
-        int minD=Integer.MAX_VALUE;
-        int last=0;
-        int first=Integer.MAX_VALUE;
-        
-        int length=1;
-        
-ListNode temp =head;        
-ListNode curr = head.next;
-
-        while(curr!=null && curr.next!=null )
+     // we can count the last critical point and in the end we can return the array of there difference
+      
+      if(head==null || head.next==null || head.next.next==null) return new int[]{-1,-1};
+      
+      int last = 0;
+      int miniDis = Integer.MAX_VALUE;
+      int first  = 0;
+      
+      int length = 1;
+      ListNode prev = head;
+      ListNode curr = head.next;
+      
+      while(curr!=null && curr.next!=null )
+      {
+        if((curr.val>prev.val && curr.val>curr.next.val)||(curr.val<prev.val && curr.val<curr.next.val))
         {
-         if((curr.val>temp.val && curr.val>curr.next.val)||(curr.val<temp.val && curr.val<curr.next.val))
-         {
-             if(last!=0)
-             {
-                 minD=Math.min(minD,length-last);
-             }
-              first = Math.min(first,length);
-            
-                last = length;
-             
-             
-         }
-            temp=curr;
-            curr=curr.next;
-            length++;
+          if(last!=0)
+          {
+            miniDis = Math.min(miniDis , length-last);
+          }
+          else
+          {
+            first = length ;
+          }
+          last = length;
         }
         
-        if(minD==Integer.MAX_VALUE)
-            return new int[]{-1,-1};
-        return new int[]{minD,(last-first)};
+        prev=curr;
+        curr=curr.next;
+        length++;
         
+        
+        }
+      
+      if(miniDis==Integer.MAX_VALUE)
+        return new int[]{-1,-1};
+      
+      return
+        new int[] {miniDis , last-first};
+      
     }
 }
