@@ -19,21 +19,25 @@ class Solution {
     
       ListNode temp = head;
       int length=1;
-      while(temp.next!=null)
-      {
-        temp=temp.next;
-        length++;
-      }
-        
      
-      int num = length/k;
         
       temp= head;
-      int len=0;
-      while(len<num)
+    
+      while(temp!=null)
       { 
         ListNode start = temp;
        
+        ListNode count = temp;
+        int countNodes = 1;
+        while(count.next!=null)
+        {
+          countNodes++;
+          count=count.next;
+        }
+        
+        if(countNodes<k) break;
+        
+        
         
         ListNode prev = null;
         ListNode curr= temp;
@@ -53,7 +57,7 @@ class Solution {
         node=start;
         
         temp = curr;
-        len++;
+        
       }
         
       return dummy.next;
