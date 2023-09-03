@@ -1,21 +1,22 @@
 class Solution {
     public void reverseString(char[] s) {
-        
-        int e = s.length-1;
-    ans(s,0,e);
+      
+      int end = s.length-1;
+      
+      reverse(s,0,end);
+      
+      
     }
+  void reverse(char[]s , int start , int end)
+  {
+    if(start>end) return ;
     
-    static void ans(char[] c ,int s ,int e)
-    {
-        if(s>=e) return;
-        
-        
-            char temp = c[s];
-            c[s]=c[e];
-            c[e]=temp;
-        
-            ans(c,s+1,e-1);
-        
-       
-    }
+    char temp = s[start];
+    s[start]=s[end];
+    s[end]=temp;
+    
+    reverse(s,start+1,end-1);
+      
+    
+  }
 }
