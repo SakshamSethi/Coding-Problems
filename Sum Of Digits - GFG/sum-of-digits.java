@@ -25,15 +25,9 @@ class GFG
 //User function Template for Java
 class Solution{
     static int sumOfDigits(int N) {
- 
- return ans( N);
-    }
-    static int ans(int n)
-    {
-        if(n<=0) return 0;
-        
-    return (n%10)+ans(n/10);
-        
+       if(N<=0)return 0;
+       
+       return N%10 + sumOfDigits(N/10);
     }
 }
        
