@@ -31,14 +31,11 @@ import java.io.*;
 
 class Solution {
     boolean arraySortedOrNot(int[] arr, int n) {
-        // code here
-        int i =1;
-        while(i<n)
-        {
-            if(arr[i-1]>arr[i]) return false;
-            i++;
-        }
-    
-        return true;
+        
+        if(n<=1)return true;
+        if(n==2)return arr[n-1]>=arr[n-2];
+        
+        return arr[n-1]>=arr[n-2] && arraySortedOrNot(arr,n-1);
+        
     }
 }
