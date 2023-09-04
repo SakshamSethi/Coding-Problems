@@ -1,5 +1,6 @@
 class Solution {
     public int myAtoi(String s) {
+      if(s.length()==0)return 0;
       return findNum(s.trim(),0,1,0);
     }
   int findNum(String s , int i , int sign , int result )
