@@ -37,10 +37,7 @@ class Solution {
      
     }
     
-   
-    
-    
-    
+  
     else if(ch=='+'&&i==0) return findNum(s,i+1,1,result);
     
     else if(ch=='-'&&i==0) return findNum(s,i+1,-1,result);
