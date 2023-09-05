@@ -1,24 +1,15 @@
 class Solution {
     public double myPow(double x, int n) {
         
-        if(x==1)return 1;
-        if(n==0)
-         return 1;
-        if(n==1)
-        {
-            return x;
-        }
-        if(n<0) return 1/x* myPow(1/x,(n+1)*-1);
-        
-        
-        double temp =  myPow(x,n/2);
-        
-        if(n%2==1)
-            return temp*temp*x;
-        
-        if(n%2==0)
-            return temp*temp;
-        
-        return temp;
+      return myFunc(x , (long)n);
     }
+  double myFunc(double x , long n)
+  {
+    if(n==0)return 1;
+    if(n<0) return myFunc(1/x,-n);
+    
+    if(n%2==0) return myFunc(x*x , n/2);
+    else return x*myFunc(x*x,n/2);
+    
+  }
 }
