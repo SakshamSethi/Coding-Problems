@@ -1,17 +1,17 @@
-
-
 class Solution {
-    public int kthGrammar(int N, int K) {
-        if(N==1 && K==1){
-            return 0;
-        }
-        
-        int mid = (int)((Math.pow(2,N-1))/2);
-        if(K<=mid){
-            return kthGrammar(N-1,K); 
-        }else{
-            return (kthGrammar(N-1, K-mid)^1);
-        }
-        
+    public int kthGrammar(int n, int k) {
+      
+      // use ceil for k
+      
+      if(n==1)return 0;
+      
+      int parent = kthGrammar(n-1 ,(k+1)/2);
+      
+      if(parent==1)
+      {
+        return k%2==1?1:0;
+      }
+      else
+        return k%2==1?0:1;
     }
 }
