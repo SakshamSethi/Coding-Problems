@@ -13,7 +13,7 @@ class Solution {
         for(int j=0 ; j<m;j++)
         {
           if(ch==board[i][j]){
-            if(checkWord(board,word,0,i,j,row,col))
+            if(checkWord(board,word,0,i,j,row,col,n,m))
               return true;
           }
         }
@@ -22,11 +22,11 @@ class Solution {
       
     }
   
-  boolean checkWord(char[][]board , String word , int idx , int i , int j,int[]row , int[]col)
+  boolean checkWord(char[][]board , String word , int idx , int i , int j,int[]row , int[]col,int n,int m)
   {
     if(idx==word.length()) return true;
     
-    if(i<0||j<0||i>=board.length||j>=board[0].length||board[i][j]!=word.charAt(idx)||board[i][j]=='0') return false;
+    if(i<0||j<0||i>=n||j>=m||board[i][j]!=word.charAt(idx)||board[i][j]=='0') return false;
     
     char temp = board[i][j];
     board[i][j]='0';
@@ -37,7 +37,7 @@ class Solution {
         int nextRow = i+row[r];
         int nextCol = j+col[r];
         
-        if(checkWord(board,word,idx+1,nextRow,nextCol,row,col))
+        if(checkWord(board,word,idx+1,nextRow,nextCol,row,col,n,m))
           return true;
         
       
