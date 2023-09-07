@@ -1,62 +1,49 @@
 class Solution {
     public boolean exist(char[][] board, String word) {
+      
+      char ch = word.charAt(0);
+      
+      // starting point 
+    int[]row = {-1,0,1,0};
+      int[]col ={0,-1,0,1};
+      for(int i=0 ; i<board.length;i++)
+      {
+        for(int j=0 ; j<board[0].length;j++)
+        {
+          if(ch==board[i][j]){
+            if(checkWord(board,word,0,i,j,row,col))
+              return true;
+          }
+        }
+      }
+      return false;
+      
+    }
   
-        for(int i=0;i<board.length;i++)
-        {
-            for(int j=0;j<board[0].length;j++)
-            {
-                if(board[i][j]==word.charAt(0))
-                {
-                    if( check(board,word,0,i,j))
-                    return true;
-                }
-            }
-        }
-return false;
-      
-    }
- 
-    static boolean check(char[][] b , String w,int s ,int r, int c)
+  boolean checkWord(char[][]board , String word , int idx , int i , int j,int[]row , int[]col)
+  {
+    if(idx==word.length()) return true;
+    
+    if(i<0||j<0||i>=board.length||j>=board[0].length||board[i][j]!=word.charAt(idx)||board[i][j]=='0') return false;
+    
+    char temp = board[i][j];
+    board[i][j]='0';
+    
+    for(int r=0 ; r<4;r++)
     {
-        if(s == w.length()) return true;
+      
+        int nextRow = i+row[r];
+        int nextCol = j+col[r];
         
-        if(r<0 || r>=b.length ||c<0 || c>=b[0].length || b[r][c]!=w.charAt(s)|| b[r][c]=='0' )
-        {
-            return false;
-        } 
+        if(checkWord(board,word,idx+1,nextRow,nextCol,row,col))
+          return true;
         
       
-        
-     
-    char temp = b[r][c];
-     
-        b[r][c]='0';
-        
-       
-        if(check(b,w,s+1,r+1,c))
-        {
-            return true;
-        }
-
-         if(check(b,w,s+1,r-1,c))
-        {
-            return true;
-        }
-
-         if(check(b,w,s+1,r,c-1))
-        {
-            return true;
-        }
-
-         if(check(b,w,s+1,r,c+1))
-        {
-            return true;
-        }
-
-        
-        b[r][c]=temp;
-        
-        return false;
-        
     }
+    
+
+    board[i][j]=temp;
+    return false;
+    
+  }
 }
