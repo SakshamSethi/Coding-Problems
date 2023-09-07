@@ -6,9 +6,11 @@ class Solution {
       // starting point 
     int[]row = {-1,0,1,0};
       int[]col ={0,-1,0,1};
-      for(int i=0 ; i<board.length;i++)
+      int n = board.length;
+      int m = board[0].length;
+      for(int i=0 ; i<n;i++)
       {
-        for(int j=0 ; j<board[0].length;j++)
+        for(int j=0 ; j<m;j++)
         {
           if(ch==board[i][j]){
             if(checkWord(board,word,0,i,j,row,col))
