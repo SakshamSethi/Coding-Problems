@@ -47,26 +47,24 @@ class Solution
 { 
     static void reverse(Stack<Integer> s)
     {
-       reverseStack(s);
-    }
-    static void reverseStack(Stack<Integer>s)
-    {
-          if(s.isEmpty()) return;
+        if(s.isEmpty())return;
         
-        int num = s.pop();
-        reverseStack(s);
-         insert(s,num);
-        return;
+        int val = s.pop();
+        reverse(s);
+        
+        insert(s,val);
+        
     }
-    static void insert(Stack<Integer>s , int num)
+    static void insert(Stack<Integer>s , int temp)
     {
         if(s.isEmpty())
         {
-            s.push(num);
+            s.push(temp);
             return;
         }
         int val = s.pop();
-        insert(s,num);
+        insert(s,temp);
         s.push(val);
+        return;
     }
 }
