@@ -38,19 +38,21 @@ class Solution
 {
     public long findMinDiff (ArrayList<Integer> a, int n, int m)
     {
-      Collections.sort(a);
-      
-      int i =0 ; int j =m-1;
-      
-      int minDiff=Integer.MAX_VALUE;
-      
-      while(j<n)
-      {
-          minDiff = Math.min(minDiff , a.get(j)-a.get(i));
-          i++;
-          j++;
-      }
-      return minDiff;
-      
+        // your code here
+    Collections.sort(a);
+    
+    if(n==0 || m>n )return 0;
+    
+    int winSize = n-m+1;
+    
+    int minCount=Integer.MAX_VALUE;
+    int count=0;
+    for(int i=0 ; i<a.size()-m+1;i++)
+    {
+        count = Math.abs(a.get(i+m-1)-a.get(i)); 
+        minCount=Math.min(minCount,count);
+         
+    }
+    return minCount;
     }
 }
