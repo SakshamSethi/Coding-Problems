@@ -1,7 +1,7 @@
 class Solution {
     public List<String> letterCombinations(String digits) {
       
-      if(digits=="" || digits.length()==0) return new ArrayList<String>();
+      if(digits.length()==0) return new ArrayList<String>();
       
       List<String> ans = new ArrayList<>();
       
