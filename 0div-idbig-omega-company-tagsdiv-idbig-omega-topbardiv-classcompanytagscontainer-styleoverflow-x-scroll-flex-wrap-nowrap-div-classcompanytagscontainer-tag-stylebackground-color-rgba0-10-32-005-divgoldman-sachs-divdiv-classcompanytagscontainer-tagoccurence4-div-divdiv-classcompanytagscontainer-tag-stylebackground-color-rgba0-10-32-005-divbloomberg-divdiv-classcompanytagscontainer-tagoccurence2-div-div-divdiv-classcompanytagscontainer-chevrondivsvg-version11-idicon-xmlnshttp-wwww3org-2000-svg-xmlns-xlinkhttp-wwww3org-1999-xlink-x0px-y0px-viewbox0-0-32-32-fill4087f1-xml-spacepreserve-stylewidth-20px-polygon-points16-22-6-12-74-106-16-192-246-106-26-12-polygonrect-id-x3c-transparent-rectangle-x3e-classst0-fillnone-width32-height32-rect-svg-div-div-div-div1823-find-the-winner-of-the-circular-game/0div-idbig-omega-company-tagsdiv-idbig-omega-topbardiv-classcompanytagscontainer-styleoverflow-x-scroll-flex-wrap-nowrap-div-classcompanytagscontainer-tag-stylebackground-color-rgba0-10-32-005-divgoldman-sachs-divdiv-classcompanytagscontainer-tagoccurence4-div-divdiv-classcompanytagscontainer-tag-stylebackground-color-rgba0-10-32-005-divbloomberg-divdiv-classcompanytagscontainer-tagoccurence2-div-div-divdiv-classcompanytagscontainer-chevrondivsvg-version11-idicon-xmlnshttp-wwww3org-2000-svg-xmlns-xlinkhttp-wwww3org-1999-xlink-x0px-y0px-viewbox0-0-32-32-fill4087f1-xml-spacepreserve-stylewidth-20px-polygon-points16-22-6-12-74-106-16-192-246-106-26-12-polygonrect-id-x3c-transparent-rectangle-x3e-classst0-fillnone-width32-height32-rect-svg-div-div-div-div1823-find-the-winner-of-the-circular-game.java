@@ -21,11 +21,11 @@ class Solution {
       
       return queue.poll();
     */
-     return helper(n,k)+1;
+     return helper(n,k);  // converting it into 1 based indexing by adding 1
     }
   int helper(int n , int k)
   {
-     if(n==1)return 0;
-      return (helper(n-1,k)+k)%n;
+     if(n==1)return 1;
+      return (helper(n-1,k)+k-1)%n+1;
   }
 }
