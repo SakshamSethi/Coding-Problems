@@ -14,11 +14,11 @@ class Solution {
     }
     int compute(int[][]grid , int i , int j )
     {
-        if(i<0 || j<0 || i>=grid.length || j>=grid[0].length || grid[i][j]==0 || grid[i][j]==-1)
+        if(i<0 || j<0 || i>=grid.length || j>=grid[0].length || grid[i][j]==0 )
             return 0;
         
         int val = grid[i][j];
-        grid[i][j]=-1;
+        grid[i][j]=0;
         int left = val + compute(grid,i,j-1);
         
         int right = val + compute(grid,i,j+1);
