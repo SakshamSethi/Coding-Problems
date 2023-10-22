@@ -9,7 +9,7 @@ class Solution {
         // Tabulation 
         
       
-        int n= nums.length;
+     /*   int n= nums.length;
         int[]dp = new int[n+1];
         dp[n-1]=nums[n-1];
         dp[n]=0;
@@ -24,7 +24,23 @@ class Solution {
         }
         
         return dp[0];
-    
+    */
+        
+        int n = nums.length;
+        int third = 0;
+        int second = nums[n-1];
+        int first =0 ;
+        
+        for(int i=n-2 ; i>=0 ; i--)
+        {
+            int take = nums[i]+third;
+            int notTake = second;
+            
+            first = Math.max(take , notTake);
+            third = second;             
+            second = first ;
+        }
+        return second;
     
     }
    /* int solve(int[]nums  , int i , int[]dp)
