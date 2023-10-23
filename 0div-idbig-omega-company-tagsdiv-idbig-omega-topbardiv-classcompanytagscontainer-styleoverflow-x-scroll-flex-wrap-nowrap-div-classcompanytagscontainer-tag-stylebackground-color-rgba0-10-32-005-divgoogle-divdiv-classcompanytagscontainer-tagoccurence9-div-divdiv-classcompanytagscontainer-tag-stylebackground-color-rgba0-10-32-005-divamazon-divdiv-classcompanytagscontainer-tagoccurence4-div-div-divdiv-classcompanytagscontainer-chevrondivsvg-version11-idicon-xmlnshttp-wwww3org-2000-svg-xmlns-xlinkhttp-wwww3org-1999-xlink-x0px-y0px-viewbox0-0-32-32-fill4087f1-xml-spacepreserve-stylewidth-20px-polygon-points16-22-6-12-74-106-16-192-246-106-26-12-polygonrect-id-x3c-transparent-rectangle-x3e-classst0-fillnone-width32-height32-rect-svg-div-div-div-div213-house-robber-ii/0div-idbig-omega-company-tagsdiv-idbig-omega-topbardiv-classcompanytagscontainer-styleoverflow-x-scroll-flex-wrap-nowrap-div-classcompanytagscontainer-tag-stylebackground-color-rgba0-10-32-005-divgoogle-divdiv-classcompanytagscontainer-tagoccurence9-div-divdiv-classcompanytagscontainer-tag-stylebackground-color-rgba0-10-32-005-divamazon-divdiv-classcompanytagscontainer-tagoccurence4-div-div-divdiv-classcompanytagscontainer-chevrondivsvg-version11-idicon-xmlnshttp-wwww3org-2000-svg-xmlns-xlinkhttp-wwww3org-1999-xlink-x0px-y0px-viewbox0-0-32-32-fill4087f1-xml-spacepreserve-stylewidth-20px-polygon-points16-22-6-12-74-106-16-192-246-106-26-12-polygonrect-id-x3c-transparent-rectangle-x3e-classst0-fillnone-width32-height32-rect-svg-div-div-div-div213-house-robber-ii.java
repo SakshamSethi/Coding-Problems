@@ -1,35 +1,34 @@
 class Solution {
-    public int rob(int[] nums) {
+    public int rob(int[] arr) {
         
-      int n = nums.length-1;
-      
-      if(n==0) return nums[0];
-      if(n==1) return Math.max(nums[0],nums[1]);
-      
-      int includeFirst = calc(nums,0,n-1);
-      int includeLast = calc(nums,1,n);
-      
-      return Math.max(includeFirst,includeLast);
-      
+        
+        
+        int n = arr.length-1;
+        if(n==0) return arr[0];
+        if(n==1) return Math.max(arr[0] , arr[1]);
+       
+        int[]dp = new int[n+1];
+        Arrays.fill(dp,-1);
+        int First = solve(arr , 0,n-1 , dp);
+         Arrays.fill(dp,-1);
+        int Second = solve(arr,1,n,dp) ;
+        return Math.max(First,Second);
     }
-  
-  int calc(int[] nums,int begin,int end)
-  {
-    int n = nums.length-1 ;
-      
-    int[] dp = new int[n+1];
-    dp[begin] =nums[begin];
-    
-    for(int i=begin+1;i<=end;i++)
+    int solve(int[]arr , int i , int n  , int[]dp)
     {
-      int take = nums[i];
-      if(i>1) take+=dp[i-2];
-      
-      int nottake = dp[i-1];
-      
-      dp[i] = Math.max(take,nottake);
+        if(i==n)return arr[i];
+        if(i>=n)return 0;
+        if(dp[i]!=-1)return dp[i];
+        
+        
+        // taking an element
+        int Take  = arr[i] + solve(arr,i+2 ,n, dp);
+        
+        //notTaking
+        int notTake = solve(arr,i+1,n,dp);
+        
+        return dp[i] = Math.max(Take , notTake);
+        
     }
-    return dp[end];
-  }
-  
+    
 }
