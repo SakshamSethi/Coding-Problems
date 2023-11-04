@@ -1,26 +1,18 @@
 class Solution {
     public int findTargetSumWays(int[] nums, int target) {
         
-        
-         return process(nums,0,target,0);
+        return count(nums,target,0,0);
         
     }
-    int process(int[]nums , int i , int target , int sum)
+    int count (int[]nums, int target ,int i , int sum)
     {
-
         if(i==nums.length)
         {
-            return target==sum?1:0 ;
+            return sum==target?1:0;
         }
-        int num = nums[i];
-        
-        int pos = process(nums,i+1,target,sum+num);
-        
-       
-        int neg = process(nums,i+1,target,sum-num);
-        
-        
+        int ele = nums[i];
+        int pos = count(nums,target,i+1,sum+ele);
+        int neg = count(nums,target,i+1,sum-ele);
         return pos+neg;
-        
     }
 }
