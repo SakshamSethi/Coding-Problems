@@ -19,12 +19,12 @@ class Solution {
         int matched = 0;
         
         if(s1.charAt(i)==s2.charAt(j))
-            matched = 1+match(s1,s2,i+1,j+1,dp);
+            return dp[i][j]= 1+match(s1,s2,i+1,j+1,dp);
         
-        int unmatched = Math.max(match(s1,s2,i+1,j,dp),match(s1,s2,i,j+1,dp));
+ 
         
-        return dp[i][j] = Math.max(matched , unmatched);
-        
+       else
+           return dp[i][j]  = Math.max(match(s1,s2,i+1,j,dp),match(s1,s2,i,j+1,dp));        
         
     }
 }
