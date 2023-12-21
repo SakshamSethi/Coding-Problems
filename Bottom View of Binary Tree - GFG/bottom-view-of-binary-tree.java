@@ -116,46 +116,66 @@ class GfG {
 
 //User function Template for Java
 
-class Pair
-{
-    Node node;
-    int x;
-    public Pair(Node node , int x)
-    {
-        this.node=node;
-        this.x=x;
-    }
-}
+
 class Solution
 {
     //Function to return a list containing the bottom view of the given tree.
-    public ArrayList <Integer> bottomView(Node root)
+    
+    class Pair
     {
-        ArrayList<Integer>ans = new ArrayList<>();
-    if(root==null)return ans;
-    if(root.left==null && root.right==null){
-        ans.add(root.data);
-        return ans;
+        Node node ;
+        int col ;
+        
+        Pair(Node node , int col)
+        {
+            this.node = node;
+            this.col = col;
+        }
     }
     
-        Queue<Pair> q = new LinkedList<>();
-        TreeMap<Integer,Integer>map = new TreeMap<>();
+    public ArrayList <Integer> bottomView(Node root)
+    {
         
-        q.offer(new Pair(root,0));
+        HashMap<Integer , Integer> map = new HashMap<>();
+        Queue<Pair>q = new LinkedList<>();
+        
+        q.add(new Pair(root,0));
+        
+        int minCol = 0;
+        int maxCol = 0;
+        
+        
         while(!q.isEmpty())
         {
-            Pair pr = q.poll();
-            int x = pr.x;
-            Node node = pr.node;
+            Pair p = q.poll();
+            Node node = p.node;
+            int col = p.col;
             
-            map.put(x,node.data);
-            if(node.left!=null) q.offer( new Pair(node.left,x-1));
-            if(node.right!=null)q.offer(new Pair(node.right,x+1));
+            map.put(col,node.data);
+            
+            minCol = Math.min(minCol , col);
+            maxCol = Math.max(maxCol , col);
+            
+            if(node.left!=null) q.offer(new Pair(node.left,col-1));
+            if(node.right!=null) q.offer(new Pair(node.right , col+1));
+            
+            
         }
-        for(int x : map.values())
+        
+        ArrayList<Integer>ans = new ArrayList<>();
+        
+        for(int i=minCol ; i<=maxCol ; i++)
         {
-            ans.add(x);
+            ans.add(map.get(i));
         }
+        
+        
         return ans;
+        
+        
+        
+        
+        
+        
     }
 }
