@@ -123,56 +123,69 @@ class Node{
     }
 }
 */
-class Pair
-{
-    Node node;
-    int x ;
-    
-    public Pair(Node node , int x)
-    {
-        this.node=node;
-        this.x=x;
-        
-    }
-}
 
 class Solution
 {
     //Function to return a list of nodes visible from the top view 
     //from left to right in Binary Tree.
+    
+    static class Pair
+    {
+        Node node ;
+        int col ;
+        Pair(Node node , int col)
+        {
+            this.node=node;
+            this.col = col;
+        }
+    }
+    
     static ArrayList<Integer> topView(Node root)
     {
-        ArrayList<Integer>ans = new ArrayList<>();
-        if(root==null) return ans;
-        if(root.left==null && root.right==null )
+         
+         HashMap<Integer,Integer>map = new HashMap();
+        
+        Queue<Pair> q = new LinkedList<>() ;
+        
+        int minCol = 0 ;
+        int maxCol = 0;
+        
+        q.add(new Pair(root , 0));
+        
+        while(!q.isEmpty())
         {
-            ans.add(root.data);
-            return ans;
+            
+            Pair p = q.poll();
+            Node node = p.node;
+            int col =p.col;
+            
+            if(!map.containsKey(col))
+            {
+                map.put(col,node.data);
+            }
+            
+            minCol = Math.min(minCol , col);
+            maxCol = Math.max(maxCol , col);
+            
+            if(node.left!=null) q.add(new Pair(node.left , col-1));
+            if(node.right!=null) q.add(new Pair(node.right,col+1));
+            
+            
+            
+            
         }
-     
-    TreeMap<Integer,Integer>map = new TreeMap();
-    Queue<Pair> q = new LinkedList();
-    
-    q.offer(new Pair(root,0));
-    while(!q.isEmpty())
-    {
-        Pair tp = q.remove();
+         
+        ArrayList<Integer>ans = new ArrayList<>();
         
-        int x = tp.x;
-        Node node = tp.node;
+        for(int i = minCol ; i<=maxCol ; i++)
+        {
+            ans.add(map.get(i));
+        }
+        return ans;
         
-        if(map.get(x)==null) map.put(x,node.data);
         
-        if(node.left!=null) q.add(new Pair(node.left,x-1));
-        if(node.right!=null) q.add(new Pair(node.right,x+1));
+        
         
         
     }
-     for(int x : map.values())
-     {
-         ans.add(x);
-     }
-     return ans;
-    }
-    
 }
