@@ -35,7 +35,6 @@ class Solution {
             for(int i=bottom ; i>=top ; i--)
                 list.add(matrix[i][left]);
             left++;
-            
             if(left > right || top > bottom) break;
             
         }
