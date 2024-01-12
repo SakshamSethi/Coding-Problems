@@ -1,7 +1,7 @@
 class Solution {
     public int longestConsecutive(int[] nums) {
         
-        LinkedHashSet<Integer> hs = new LinkedHashSet();
+        HashSet<Integer> hs = new HashSet();
         
         for(int ele : nums) hs.add(ele);
         
