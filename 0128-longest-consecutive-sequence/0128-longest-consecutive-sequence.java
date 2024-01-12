@@ -8,7 +8,7 @@ class Solution {
         
         int longest = 0 ;
         
-        for(int ele : nums)
+        for(int ele : hs)
         {
             
             if(!hs.contains(ele-1))
