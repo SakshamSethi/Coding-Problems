@@ -1,71 +1,47 @@
 class Solution {
     public List<Integer> majorityElement(int[] nums) {
-      
-    /*  HashMap<Integer,Integer> map = new HashMap<>();
-      int n=nums.length;
-      for(int num : nums)
-      {
-        map.put(num,map.getOrDefault(num,0)+1);
-      }
-      List<Integer>ans = new ArrayList<>();
-      for(Map.Entry<Integer,Integer> e : map.entrySet())
-      {
-        if(e.getValue()>n/3) ans.add(e.getKey());
-      }
-      return ans;
-    */
-      
-      // Moore's Voting Algorithm 
-      
-      int n = nums.length ;
-      
-      int cnt1 = 0;
-      int cnt2 =0 ;
-      
-      int ele1 = Integer.MIN_VALUE;
-      int ele2 = Integer.MIN_VALUE;
-      
-      for(int i=0 ; i<n ; i++)
-      {
-        if(cnt1==0 && nums[i]!=ele2)
+     
+        int count1 = 0;
+        int count2 = 0;
+        
+        int element1 = Integer.MIN_VALUE;
+        int element2 = Integer.MAX_VALUE;
+        
+        int n = nums.length;
+        
+        for(int i=0 ; i<n ; i++)
         {
-          cnt1 = 1;
-          ele1 = nums[i];
+            if(count1==0 && nums[i]!=element2)
+                element1=nums[i];
+            
+            if(count2==0 && nums[i]!=element1)
+                element2=nums[i];
+            
+            if(element1 == nums[i]) count1++;
+            else if (element2==nums[i]) count2++;
+            else
+            {
+                count1--;
+                count2--;
+            }
         }
         
-        else if(cnt2==0 && nums[i]!=ele1)
+        // verify 
+        
+        count1=0; count2=0;
+        
+        int freq = n/3;
+        List<Integer> ans = new ArrayList<>();
+        
+        for(int element : nums)
         {
-          cnt2=1;
-          ele2 = nums[i];
+            if(element == element1)count1++;
+            if(element==element2)count2++;
         }
         
-        else if(ele1==nums[i]) cnt1++;
-        else if(ele2==nums[i]) cnt2++;
+        if(count1>freq) ans.add(element1);
+        if(count2>freq) ans.add(element2);
+        return ans;
         
-        else
-        {
-          cnt1--;
-          cnt2--;
-        }
-        
-        
-      }
-      
-      cnt1 = 0;
-      cnt2 = 0;
-      
-      for(int num : nums)
-      {
-        if(num==ele1)cnt1++;
-        else if(num==ele2)cnt2++;
-      }
-      
-List<Integer> ans = new ArrayList<>();
-      
-      if(cnt1>(n/3))ans.add(ele1);
-      if(cnt2>(n/3))ans.add(ele2);
-      return ans;
-        
-      
-    }   
+    }
 }
