@@ -6,13 +6,17 @@ class Solution {
         int n = nums.length;
         
         HashMap<Integer,Integer> hmap = new HashMap();
-        hmap.put(0,1);
+        //hmap.put(0,1);
         int curSum =0 ;
         
         for(int i=0 ; i<n ; i++)
         {
             curSum+=nums[i];
             
+            if(curSum-k==0)
+            {
+                count++;
+            }
             if(hmap.containsKey(curSum-k))  
             {
                 count+=hmap.get(curSum-k);
