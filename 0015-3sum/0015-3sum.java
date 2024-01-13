@@ -1,83 +1,72 @@
 class Solution {
     public List<List<Integer>> threeSum(int[] nums) {
-     /*   
-     //HashSet solution :
-      int n = nums.length ;
-   // a[i]+a[j]+a[k]---> store a[j] : check if a[k] = a[i]-a[j] exists in the set --> one triplet
-
-      HashSet<List<Integer>> set = new HashSet<>();
-          HashSet<Integer> st = new HashSet<>();    
-      for(int i=0 ; i<n ; i++)
-      {
-      
         
-        for(int j=i+1 ; j<n ; j++)
+      /*
+      Brute Force :
+        
+        HashSet<List<Integer>> hs = new HashSet();
+        List<List<Integer>> ans = new ArrayList();
+        
+        int n = nums.length;
+        
+        for(int i=0 ; i< n ; i++)
         {
-          int third = -(nums[i]+nums[j]);
-          
-          if(st.contains(third))
-          {
-            List<Integer> temp = Arrays.asList(nums[i],nums[j],third);
-            
-            Collections.sort(temp);
-            set.add(temp);
-            
-          }
-          
-          
-          st.add(nums[j]);
+            for(int j = i+1 ; j< n ; j++)
+            {
+                for(int k=j+1 ; k<n ; k++ )
+                {
+                    if(nums[i]+ nums[j]+ nums[k] == 0 )
+                    {
+                        List<Integer> arr = new ArrayList();
+                        arr.add(nums[i]);
+                        arr.add(nums[j]);
+                        arr.add(nums[k]);
+                        Collections.sort(arr);
+                        hs.add(new ArrayList(arr));
+                      }
+                }
+            }
         }
-        st.clear();
+        
+        for(List<Integer> temp : hs)
+        {
+            ans.add(new ArrayList(temp));
+        }
+        return ans;
+       */
+        
+        
+        HashSet<Integer> temp ;
+        HashSet<List<Integer>> hs = new HashSet();
+        List<List<Integer>> ans = new ArrayList<>();
+        int n = nums.length;
+        for(int i=0 ; i<n ; i++)
+        {
+            temp = new HashSet();
+            for(int j=i+1 ; j<n ; j++)
+            {
+               
+                int k = -(nums[i]+nums[j]);
+                
+                if(temp.contains(k))
+                {
+                    List<Integer> list = new ArrayList();
+                    list.add(nums[i]);
+                    list.add(nums[j]);
+                    list.add(k);
+                    Collections.sort(list);
+                    hs.add(new ArrayList(list));
+                    
+                }
+                
+                temp.add(nums[j]);
+            }
+        }
        
-      }
-      
-            List<List<Integer>> ans = new ArrayList<>(set);
-            return ans;
-     */ 
-      
-      
-      // Optimal Solution : use 2pointer + sorting approach +  lowerBound / upperBound approach 
-      
-      int n = nums.length ;
-      Arrays.sort(nums);
-      
-      List<List<Integer>>ans = new ArrayList<>();
-      
-      for(int i =0 ; i <n ; i++)
-      {
-        if(i>0 && nums[i]==nums[i-1]) continue ;
-        
-        int j = i+1;
-        int k = n-1;
-        
-        while(j<k)
+        for(List<Integer> list : hs)
         {
-          int sum = nums[i]+nums[j]+nums[k];
-          
-          if(sum>0)
-          {
-            k--;
-          }
-          else if(sum<0)
-          {
-            j++;
-          }
-          else
-          {
-            List<Integer> temp = Arrays.asList(nums[i],nums[j],nums[k]);
-            ans.add(temp);
-            j++;
-            k--;
-            while(j<k && nums[j]==nums[j-1]) j++;
-            while(j<k && nums[k]==nums[k+1]) k--;
-            
-          }
-        
+            ans.add(new ArrayList(list));
         }
-        
-      }
-      
-      return ans;
-      
+      return ans;  
     }
 }
