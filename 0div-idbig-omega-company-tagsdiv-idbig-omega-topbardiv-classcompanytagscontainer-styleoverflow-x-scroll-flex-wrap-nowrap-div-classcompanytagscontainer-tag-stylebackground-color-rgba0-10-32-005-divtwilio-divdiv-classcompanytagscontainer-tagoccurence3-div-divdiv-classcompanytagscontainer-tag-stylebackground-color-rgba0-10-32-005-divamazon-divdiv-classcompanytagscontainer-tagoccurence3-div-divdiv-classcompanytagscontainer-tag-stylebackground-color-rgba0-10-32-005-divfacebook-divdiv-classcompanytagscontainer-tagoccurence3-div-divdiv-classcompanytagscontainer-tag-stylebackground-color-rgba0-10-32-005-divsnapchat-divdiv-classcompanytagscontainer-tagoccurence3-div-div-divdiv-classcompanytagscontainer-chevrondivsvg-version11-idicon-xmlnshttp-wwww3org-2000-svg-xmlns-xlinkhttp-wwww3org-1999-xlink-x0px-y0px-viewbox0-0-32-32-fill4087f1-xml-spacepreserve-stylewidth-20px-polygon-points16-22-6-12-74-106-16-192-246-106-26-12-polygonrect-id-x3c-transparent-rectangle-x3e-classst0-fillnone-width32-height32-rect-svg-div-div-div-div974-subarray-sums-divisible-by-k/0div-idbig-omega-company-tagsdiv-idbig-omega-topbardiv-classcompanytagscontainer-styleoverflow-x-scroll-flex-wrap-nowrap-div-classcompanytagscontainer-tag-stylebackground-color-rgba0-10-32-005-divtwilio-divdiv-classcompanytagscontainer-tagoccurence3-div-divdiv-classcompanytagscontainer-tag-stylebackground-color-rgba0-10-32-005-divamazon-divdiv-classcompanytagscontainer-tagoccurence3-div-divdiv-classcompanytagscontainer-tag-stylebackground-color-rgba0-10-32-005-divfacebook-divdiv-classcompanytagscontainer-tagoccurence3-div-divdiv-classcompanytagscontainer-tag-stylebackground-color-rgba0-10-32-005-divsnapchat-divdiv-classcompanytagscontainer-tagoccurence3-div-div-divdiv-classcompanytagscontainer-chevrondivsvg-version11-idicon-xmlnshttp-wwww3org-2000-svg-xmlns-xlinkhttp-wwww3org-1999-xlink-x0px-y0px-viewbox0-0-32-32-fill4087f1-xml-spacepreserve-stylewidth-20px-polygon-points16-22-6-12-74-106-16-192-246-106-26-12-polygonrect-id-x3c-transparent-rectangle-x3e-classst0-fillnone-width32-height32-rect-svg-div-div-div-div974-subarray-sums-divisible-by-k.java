@@ -11,7 +11,8 @@ class Solution {
             
             int rem = currSum%k;
             if(rem<0) rem+=k;
-            System.out.println(rem);
+            
+ 
             if(hmap.containsKey(rem))
             {
                 count+=hmap.get(rem);
