@@ -1,17 +1,17 @@
 class Solution {
-    public String convertToTitle(int c) {
+    public String convertToTitle(int columnNumber) {
         
-        StringBuilder s = new StringBuilder();
-        
-        while(c>0)
-        {
-            int rem = (c-1)%26;
+        StringBuilder ans = new StringBuilder();
+      
          
-            
-            c=(c-1)/26;
-            s.append((char)('A'+rem));
-                
+        while(columnNumber!=0)
+        {
+              columnNumber--;
+            int rem = columnNumber%26;
+            ans.append((char)(rem+'A') );
+            columnNumber /=26;
+             
         }
-        return s.reverse().toString();
+        return ans.reverse().toString();
     }
 }
