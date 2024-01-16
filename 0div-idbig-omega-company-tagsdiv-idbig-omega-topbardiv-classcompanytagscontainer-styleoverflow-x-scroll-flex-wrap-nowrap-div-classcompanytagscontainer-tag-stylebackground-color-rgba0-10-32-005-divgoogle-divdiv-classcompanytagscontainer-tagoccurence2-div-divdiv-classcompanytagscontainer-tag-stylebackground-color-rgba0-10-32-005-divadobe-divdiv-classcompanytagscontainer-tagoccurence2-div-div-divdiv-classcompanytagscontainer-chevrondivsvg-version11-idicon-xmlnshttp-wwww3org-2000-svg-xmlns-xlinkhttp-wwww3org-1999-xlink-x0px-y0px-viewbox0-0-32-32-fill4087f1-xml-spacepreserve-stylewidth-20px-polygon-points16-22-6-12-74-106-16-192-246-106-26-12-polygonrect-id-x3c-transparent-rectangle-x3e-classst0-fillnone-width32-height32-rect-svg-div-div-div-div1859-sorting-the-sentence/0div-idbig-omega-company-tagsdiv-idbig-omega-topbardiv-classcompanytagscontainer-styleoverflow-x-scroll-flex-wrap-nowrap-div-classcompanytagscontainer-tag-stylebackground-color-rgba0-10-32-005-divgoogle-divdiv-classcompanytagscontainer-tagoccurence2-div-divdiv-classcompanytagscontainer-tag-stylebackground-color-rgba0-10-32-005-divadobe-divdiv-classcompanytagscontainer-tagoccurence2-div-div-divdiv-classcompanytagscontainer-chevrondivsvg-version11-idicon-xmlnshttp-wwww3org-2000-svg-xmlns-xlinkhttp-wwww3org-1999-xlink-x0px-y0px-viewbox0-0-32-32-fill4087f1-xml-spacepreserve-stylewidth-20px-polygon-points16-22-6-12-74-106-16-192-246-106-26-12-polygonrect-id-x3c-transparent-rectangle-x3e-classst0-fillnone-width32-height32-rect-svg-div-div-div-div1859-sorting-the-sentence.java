@@ -1,7 +1,7 @@
 class Solution {
     public String sortSentence(String s) {
         
-        s=s.trim();
+        
         String[] arr = s.split(" ");
         
         String[] ans = new String[arr.length];
