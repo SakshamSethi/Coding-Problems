@@ -10,7 +10,7 @@ class Solution {
         
         for(String w : word2)
             str2.append(w);
-        System.out.println(str1+" "+str2);
+       
         return str1.toString().equals(str2.toString());
     }
 }
