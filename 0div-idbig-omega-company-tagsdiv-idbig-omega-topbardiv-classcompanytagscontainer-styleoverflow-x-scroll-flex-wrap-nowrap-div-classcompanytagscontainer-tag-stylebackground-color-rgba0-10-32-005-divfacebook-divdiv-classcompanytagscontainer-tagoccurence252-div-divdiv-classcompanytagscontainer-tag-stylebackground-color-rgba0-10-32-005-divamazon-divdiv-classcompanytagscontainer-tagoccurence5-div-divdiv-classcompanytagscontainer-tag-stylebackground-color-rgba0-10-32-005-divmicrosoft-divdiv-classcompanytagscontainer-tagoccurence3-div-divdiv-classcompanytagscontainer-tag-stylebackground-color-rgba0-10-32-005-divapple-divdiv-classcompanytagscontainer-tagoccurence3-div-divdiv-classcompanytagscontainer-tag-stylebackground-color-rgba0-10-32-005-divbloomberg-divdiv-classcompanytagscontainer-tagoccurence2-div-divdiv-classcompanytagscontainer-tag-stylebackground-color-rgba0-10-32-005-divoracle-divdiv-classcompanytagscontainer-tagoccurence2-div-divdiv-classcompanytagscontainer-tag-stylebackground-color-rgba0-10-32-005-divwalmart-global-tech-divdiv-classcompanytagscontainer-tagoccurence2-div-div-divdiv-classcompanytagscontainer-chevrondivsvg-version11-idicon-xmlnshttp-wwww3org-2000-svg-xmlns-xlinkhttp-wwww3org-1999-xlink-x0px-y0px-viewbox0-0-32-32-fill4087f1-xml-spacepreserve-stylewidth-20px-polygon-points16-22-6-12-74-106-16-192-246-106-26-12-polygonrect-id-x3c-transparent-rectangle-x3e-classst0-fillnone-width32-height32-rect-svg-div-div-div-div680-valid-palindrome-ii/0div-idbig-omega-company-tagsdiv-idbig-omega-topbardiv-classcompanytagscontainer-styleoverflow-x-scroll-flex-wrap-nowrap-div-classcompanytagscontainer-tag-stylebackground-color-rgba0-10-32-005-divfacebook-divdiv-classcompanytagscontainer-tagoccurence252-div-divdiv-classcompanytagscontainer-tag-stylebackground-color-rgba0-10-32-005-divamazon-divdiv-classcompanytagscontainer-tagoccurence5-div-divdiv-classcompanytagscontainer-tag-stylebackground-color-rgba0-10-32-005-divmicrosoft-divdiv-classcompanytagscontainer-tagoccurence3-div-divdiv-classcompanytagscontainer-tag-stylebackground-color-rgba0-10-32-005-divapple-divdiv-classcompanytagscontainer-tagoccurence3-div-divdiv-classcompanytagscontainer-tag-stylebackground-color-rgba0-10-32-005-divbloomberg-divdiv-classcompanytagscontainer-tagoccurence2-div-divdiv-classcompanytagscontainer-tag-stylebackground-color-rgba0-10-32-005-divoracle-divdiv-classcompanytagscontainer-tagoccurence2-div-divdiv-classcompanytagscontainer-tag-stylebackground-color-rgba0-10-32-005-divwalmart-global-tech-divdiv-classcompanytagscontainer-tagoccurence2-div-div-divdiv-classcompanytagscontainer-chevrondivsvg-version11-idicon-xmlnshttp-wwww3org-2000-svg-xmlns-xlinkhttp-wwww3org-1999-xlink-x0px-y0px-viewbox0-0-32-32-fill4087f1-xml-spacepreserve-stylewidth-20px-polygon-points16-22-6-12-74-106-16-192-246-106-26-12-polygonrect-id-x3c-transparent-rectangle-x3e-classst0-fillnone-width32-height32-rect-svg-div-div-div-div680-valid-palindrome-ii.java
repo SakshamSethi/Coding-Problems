@@ -8,7 +8,7 @@ class Solution {
         if(counter>1)return false;
         int i = 0; 
         int j= s.length()-1;
-        System.out.println(s);
+ 
         while(i<j)
         {
             boolean isLeft=false , isRight=false;
